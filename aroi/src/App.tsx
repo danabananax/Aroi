@@ -36,7 +36,7 @@ function App() {
     <BrowserRouter>
       <Center minWidth="60vw" height="80vh">
         <Box height="100%">
-          <Heading fontSize="6xl" m={6}>Aroi</Heading>
+          <Heading fontSize="8xl" m={6}>aroi</Heading>
           <Box pt="6em">
             <Skeleton isLoaded={!loadingAuth}>
               <Text fontSize="4xl">{ signedInUser ? 'signed in' : 'signed out' }</Text>

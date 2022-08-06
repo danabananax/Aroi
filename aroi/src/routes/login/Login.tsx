@@ -13,15 +13,18 @@ interface LoginProps {
 function Login({ signedInUser }: LoginProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loadingSubmit, setLoadingSubmit] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setLoadingSubmit(true);
     signInWithEmailAndPassword(auth, email, password)
-      .then(() => { console.log('successfully logged in'); })
+      .then(() => { console.log('successfully logged in'); setLoadingSubmit(false); })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.error(errorCode, errorMessage);
+        setLoadingSubmit(false);
       });
   };
   if (signedInUser) return <Navigate to="/" />;
@@ -34,7 +37,7 @@ function Login({ signedInUser }: LoginProps) {
           password={password}
           setPassword={setPassword}
         />
-        <Button type="submit">Login</Button>
+        <Button isLoading={loadingSubmit} type="submit">Login</Button>
       </form>
       <Link to="/register">Register</Link>
     </>

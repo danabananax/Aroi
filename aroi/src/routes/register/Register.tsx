@@ -13,16 +13,19 @@ interface RegisterProps {
 function Register({ signedInUser }: RegisterProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loadingSubmit, setLoadingSubmit] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setLoadingSubmit(true);
     console.log('handlesubmit being run');
     createUserWithEmailAndPassword(auth, email, password)
-      .then(() => { console.log('successfully registered'); })
+      .then(() => { console.log('successfully registered'); setLoadingSubmit(false); })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.error(errorCode, errorMessage);
+        setLoadingSubmit(false);
       });
   };
   if (signedInUser) return <Navigate to="/" />;
@@ -35,7 +38,7 @@ function Register({ signedInUser }: RegisterProps) {
           password={password}
           setPassword={setPassword}
         />
-        <Button type="submit">
+        <Button isLoading={loadingSubmit} type="submit">
           Sign up
         </Button>
       </form>
