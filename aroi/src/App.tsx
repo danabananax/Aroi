@@ -22,7 +22,7 @@ function App() {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setLoadingAuth(true);
       if (user) {
-        console.log('this being called');
+        console.log('Auth state changed');
         setSignedInUser(user);
       } else {
         setSignedInUser(null);
@@ -34,8 +34,8 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Center minWidth="60vw" height="80vh">
-        <Box height="100%">
+      <Center minW="60vw" h="100vh">
+        <Box h="100%">
           <Heading fontSize="8xl" m={6}>aroi</Heading>
           <Box pt="6em">
             <Skeleton isLoaded={!loadingAuth}>

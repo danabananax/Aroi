@@ -19,7 +19,10 @@ function Login({ signedInUser }: LoginProps) {
     e.preventDefault();
     setLoadingSubmit(true);
     signInWithEmailAndPassword(auth, email, password)
-      .then(() => { console.log('successfully logged in'); setLoadingSubmit(false); })
+      .then((userCredential) => {
+        console.log('successfully logged in: ', userCredential);
+        setLoadingSubmit(false);
+      })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
@@ -27,6 +30,7 @@ function Login({ signedInUser }: LoginProps) {
         setLoadingSubmit(false);
       });
   };
+
   if (signedInUser) return <Navigate to="/" />;
   return (
     <>
@@ -37,7 +41,7 @@ function Login({ signedInUser }: LoginProps) {
           password={password}
           setPassword={setPassword}
         />
-        <Button isLoading={loadingSubmit} type="submit">Login</Button>
+        <Button isLoading={loadingSubmit} type="submit" m={2}>Login</Button>
       </form>
       <Link to="/register">Register</Link>
     </>

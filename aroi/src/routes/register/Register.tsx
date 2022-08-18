@@ -38,7 +38,7 @@ function Register({ signedInUser }: RegisterProps) {
           password={password}
           setPassword={setPassword}
         />
-        <Button isLoading={loadingSubmit} type="submit">
+        <Button isLoading={loadingSubmit} type="submit" m={2}>
           Sign up
         </Button>
       </form>
