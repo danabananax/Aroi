@@ -11,12 +11,14 @@ import './App.css';
 import Register from './routes/register/Register';
 import Login from './routes/login/Login';
 import HomeLayout from './routes/home/HomeLayout';
+import ViewRecipeLayout from './routes/recipe/ViewRecipeLayout';
 
 export type Iuser = User | null;
 
 function App() {
   const [signedInUser, setSignedInUser] = useState<Iuser>(auth.currentUser);
   const [loadingAuth, setLoadingAuth] = useState<boolean>(true);
+  const [selectedRecipe, setSelectedRecipe] = useState<any>();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -41,9 +43,18 @@ function App() {
             <Skeleton isLoaded={!loadingAuth}>
               <Text fontSize="4xl">{ signedInUser ? 'signed in' : 'signed out' }</Text>
               <Routes>
-                <Route path="/" element={<HomeLayout signedInUser={signedInUser} />} />
+                <Route path="/" element={<HomeLayout signedInUser={signedInUser} setSelectedRecipe={setSelectedRecipe} />} />
                 <Route path="login" element={<Login signedInUser={signedInUser} />} />
                 <Route path="register" element={<Register signedInUser={signedInUser} />} />
+                <Route
+                  path="recipe"
+                  element={(
+                    <ViewRecipeLayout
+                      signedInUser={signedInUser}
+                      selectedRecipe={selectedRecipe}
+                    />
+)}
+                />
               </Routes>
             </Skeleton>
           </Box>

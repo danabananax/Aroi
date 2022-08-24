@@ -6,10 +6,6 @@ import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../firebase';
 import RecipeLink from '../components/RecipeLink';
 
-interface HomeDataProps {
-    userId: string
-}
-
 export interface recipe {
     active_time: string
     group: Array<string>
@@ -21,7 +17,12 @@ export interface recipe {
     total_time: string
 }
 
-function HomeData({ userId }: HomeDataProps) {
+interface HomeDataProps {
+    userId: string
+    setSelectedRecipe: React.Dispatch<recipe>
+}
+
+function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
   const [userRecipes, setUserRecipes] = useState([]);
   const [loadingRecipes, setLoadingRecipes] = useState(true);
 
@@ -51,7 +52,7 @@ function HomeData({ userId }: HomeDataProps) {
       <Skeleton isLoaded={!loadingRecipes}>
         {!loadingRecipes && userRecipes.length !== 0
         && userRecipes.map((recipe: recipe) => (
-          <RecipeLink recipe={recipe} />
+          <RecipeLink recipe={recipe} setSelectedRecipe={setSelectedRecipe} />
         ))}
       </Skeleton>
     </Box>

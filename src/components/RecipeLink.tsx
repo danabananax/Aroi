@@ -6,16 +6,17 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { recipe } from '../routes/home/HomeData';
 
-interface RProps {
-    recipe: recipe,
-    recipeId: number,
+interface RecipeLinkProps {
+    recipe: recipe
+    setSelectedRecipe: React.Dispatch<recipe>
 }
 
-function RecipeLink({ recipe, recipeId }: RProps) {
+function RecipeLink({ recipe, setSelectedRecipe }: RecipeLinkProps) {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/recipe/${recipeId}`);
+    setSelectedRecipe(recipe);
+    navigate('/recipe');
   };
 
   return (

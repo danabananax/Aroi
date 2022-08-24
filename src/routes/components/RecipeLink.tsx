@@ -3,15 +3,34 @@ import React from 'react';
 import {
   Flex, Heading, Box, Text,
 } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 import { recipe } from '../home/HomeData';
 
-interface RProps {
+interface RecipeLinkProps {
     recipe: recipe
+    setSelectedRecipe: React.Dispatch<recipe>
 }
 
-function RecipeLink({ recipe }: RProps) {
+function RecipeLink({ recipe, setSelectedRecipe }: RecipeLinkProps) {
+  const navigate = useNavigate();
+
+  const handleLinkClick = () => {
+    setSelectedRecipe(recipe);
+    navigate('/recipe');
+  };
+
   return (
-    <Flex direction="row" w="400px" justify="space-between" m={2} p={4} borderRadius="9" boxShadow="md">
+    <Flex
+      as="button"
+      direction="row"
+      w="400px"
+      justify="space-between"
+      m={2}
+      p={4}
+      borderRadius="9"
+      boxShadow="md"
+      onClick={handleLinkClick}
+    >
       <Heading>
         {recipe.name}
       </Heading>

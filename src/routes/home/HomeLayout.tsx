@@ -6,13 +6,14 @@ import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { Iuser } from '../../App';
 import { auth } from '../../firebase';
-import HomeData from './HomeData';
+import HomeData, { recipe } from './HomeData';
 
 interface HomeProps {
   signedInUser: Iuser
+  setSelectedRecipe: React.Dispatch<recipe>
 }
 
-function Home({ signedInUser }: HomeProps) {
+function Home({ signedInUser, setSelectedRecipe }: HomeProps) {
   const [logoutLoading, setLogoutLoading] = useState(false);
 
   const handleLogout = () => {
@@ -36,7 +37,7 @@ function Home({ signedInUser }: HomeProps) {
       >
         Logout
       </Button>
-      {signedInUser && <HomeData userId={signedInUser.uid} />}
+      {signedInUser && <HomeData userId={signedInUser.uid} setSelectedRecipe={setSelectedRecipe} />}
     </Box>
   );
 }
