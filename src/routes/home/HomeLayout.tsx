@@ -3,10 +3,10 @@ import {
 } from '@chakra-ui/react';
 import { signOut } from 'firebase/auth';
 import React, { useState } from 'react';
-import { Navigate } from 'react-router-dom';
-import { Iuser } from '../../App';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase';
-import HomeData, { recipe } from './HomeData';
+import { Iuser, recipe } from '../../types';
+import HomeData from './HomeData';
 
 interface HomeProps {
   signedInUser: Iuser
@@ -15,6 +15,7 @@ interface HomeProps {
 
 function Home({ signedInUser, setSelectedRecipe }: HomeProps) {
   const [logoutLoading, setLogoutLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     setLogoutLoading(true);
@@ -26,6 +27,8 @@ function Home({ signedInUser, setSelectedRecipe }: HomeProps) {
       .catch((error) => { console.error(error); });
   };
 
+  const handleAddRecipe = () => { navigate('/add'); };
+
   if (!signedInUser) return <Navigate to="/login" />;
   return (
     <Box>
@@ -36,6 +39,12 @@ function Home({ signedInUser, setSelectedRecipe }: HomeProps) {
         m={2}
       >
         Logout
+      </Button>
+      <Button
+        onClick={handleAddRecipe}
+        m={2}
+      >
+        Add Recipe
       </Button>
       {signedInUser && <HomeData userId={signedInUser.uid} setSelectedRecipe={setSelectedRecipe} />}
     </Box>

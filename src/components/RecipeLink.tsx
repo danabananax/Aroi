@@ -4,7 +4,7 @@ import {
   Flex, Heading, Box, Text,
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
-import { recipe } from '../routes/home/HomeData';
+import { recipe } from '../types';
 
 interface RecipeLinkProps {
     recipe: recipe
