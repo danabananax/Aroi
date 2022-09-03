@@ -1,18 +1,38 @@
 import {
   Box, Tab, TabList, TabPanel, TabPanels, Tabs,
 } from '@chakra-ui/react';
-import React from 'react';
+import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import { Iuser } from '../../types';
+import { Iuser, recipe } from '../../types';
 import AddIngredients from './AddIngredients';
 import AddMethod from './AddMethod';
 import AddName from './AddName';
 
-interface AddRecipeProps {
+interface addRecipeProps {
   signedInUser: Iuser
 }
 
-function AddRecipeContainer({ signedInUser }: AddRecipeProps) {
+export interface setRecipeProps {
+  newRecipe: recipe
+  setNewRecipe: React.Dispatch<recipe>
+}
+
+function AddRecipeContainer({ signedInUser }: addRecipeProps) {
+  const defaultRecipe:recipe = {
+    active_time: 'defaultTime',
+    group: [''],
+    ingredients: { default: 'default' },
+    method: [],
+    name: '',
+    servings: 0,
+    tags: [''],
+    total_time: 'defaultTotal',
+  };
+
+  // TODO: error handling for form inputs
+  // TODO: successfully submit recipe to firebase
+
+  const [newRecipe, setNewRecipe] = useState<recipe>(defaultRecipe);
   if (!signedInUser) return <Navigate to="/login" />;
   return (
     <Box>
@@ -24,13 +44,13 @@ function AddRecipeContainer({ signedInUser }: AddRecipeProps) {
         </TabList>
         <TabPanels>
           <TabPanel>
-            <AddName />
+            <AddName newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
           </TabPanel>
           <TabPanel>
-            <AddIngredients />
+            <AddIngredients newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
           </TabPanel>
           <TabPanel>
-            <AddMethod />
+            <AddMethod newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
           </TabPanel>
         </TabPanels>
       </Tabs>
