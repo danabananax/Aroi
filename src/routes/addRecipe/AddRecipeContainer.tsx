@@ -3,6 +3,7 @@ import {
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
+import BackButton from '../../components/BackButton';
 import SubmitRecipeButton from '../../components/SubmitRecipeButton';
 import { recipe, signedInUserProp } from '../../types';
 import AddIngredients from './AddIngredients';
@@ -53,6 +54,7 @@ function AddRecipeContainer({ signedInUser }: signedInUserProp) {
           </TabPanels>
         </Box>
         <SubmitRecipeButton userId={signedInUser.uid} newRecipe={newRecipe} />
+        <BackButton />
       </Tabs>
     </Flex>
   );

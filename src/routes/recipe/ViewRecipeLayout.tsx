@@ -1,24 +1,18 @@
-import {
-  Box,
-  Button, Fade, Flex, Heading,
-} from '@chakra-ui/react';
 import React from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import {
+  Box, Fade, Flex, Heading,
+} from '@chakra-ui/react';
+import { Navigate } from 'react-router-dom';
+import BackButton from '../../components/BackButton';
 import { ViewRecipeProps } from '../../types';
 
 function ViewRecipeLayout({ signedInUser, selectedRecipe }: ViewRecipeProps) {
   const userId = signedInUser?.uid;
-  const navigate = useNavigate();
-  const handleBack = () => {
-    navigate('/');
-  };
 
   return userId && selectedRecipe ? (
     <div>
       <Heading size="3xl">View Recipe</Heading>
-      <Button onClick={handleBack} m={2}>
-        Back
-      </Button>
+      <BackButton />
       <Fade in>
         <Heading>{selectedRecipe.name}</Heading>
         <Box m={6}>
