@@ -5,13 +5,8 @@ import { signOut } from 'firebase/auth';
 import React, { useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase';
-import { Iuser, recipe } from '../../types';
+import { HomeProps } from '../../types';
 import HomeData from './HomeData';
-
-interface HomeProps {
-  signedInUser: Iuser
-  setSelectedRecipe: React.Dispatch<recipe>
-}
 
 function Home({ signedInUser, setSelectedRecipe }: HomeProps) {
   const [logoutLoading, setLogoutLoading] = useState(false);

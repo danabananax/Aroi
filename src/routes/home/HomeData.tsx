@@ -21,7 +21,6 @@ function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
       const userRecipesDoc = doc(db, 'users', userId);
       const userDoc = await getDoc(userRecipesDoc);
       await setUserRecipes(userDoc.data()?.recipes);
-      console.log(userRecipes);
     } catch (e) {
       console.log(e);
     }
@@ -39,7 +38,11 @@ function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
       <Skeleton isLoaded={!loadingRecipes}>
         {!loadingRecipes && userRecipes.length !== 0
         && userRecipes.map((recipe: recipe) => (
-          <RecipeLink recipe={recipe} setSelectedRecipe={setSelectedRecipe} />
+          <RecipeLink
+            recipe={recipe}
+            setSelectedRecipe={setSelectedRecipe}
+            key={`id${Math.random().toString(16).slice(2)}`}
+          />
         ))}
       </Skeleton>
     </Box>

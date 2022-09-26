@@ -1,6 +1,6 @@
 import React from 'react';
-import { Box, Heading, Input } from '@chakra-ui/react';
-import { setRecipeProps } from './AddRecipeContainer';
+import { Heading, Input } from '@chakra-ui/react';
+import { setRecipeProps } from '../../types';
 
 function AddName({ newRecipe, setNewRecipe }: setRecipeProps) {
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -9,14 +9,14 @@ function AddName({ newRecipe, setNewRecipe }: setRecipeProps) {
   };
 
   return (
-    <Box>
+    <>
       <Heading>Add name</Heading>
       <Input
         onChange={handleNameChange}
         placeholder="Recipe name"
         value={newRecipe.name}
       />
-    </Box>
+    </>
   );
 }
 

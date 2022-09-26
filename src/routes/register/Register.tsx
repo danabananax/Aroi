@@ -4,13 +4,9 @@ import { Link, Navigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import RegisterForm from './RegisterForm';
 import { auth } from '../../firebase';
-import { Iuser } from '../../App';
+import { signedInUserProp } from '../../types';
 
-interface RegisterProps {
-  signedInUser: Iuser
-}
-
-function Register({ signedInUser }: RegisterProps) {
+function Register({ signedInUser }: signedInUserProp) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loadingSubmit, setLoadingSubmit] = useState(false);

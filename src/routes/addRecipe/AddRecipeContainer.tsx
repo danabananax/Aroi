@@ -1,32 +1,25 @@
 import {
-  Box, Tab, TabList, TabPanel, TabPanels, Tabs,
+  Box, Flex, Tab, TabList, TabPanel, TabPanels, Tabs,
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import { Iuser, recipe } from '../../types';
+import SubmitRecipeButton from '../../components/SubmitRecipeButton';
+import { recipe, signedInUserProp } from '../../types';
 import AddIngredients from './AddIngredients';
 import AddMethod from './AddMethod';
+import AddMisc from './AddMisc';
 import AddName from './AddName';
 
-interface addRecipeProps {
-  signedInUser: Iuser
-}
-
-export interface setRecipeProps {
-  newRecipe: recipe
-  setNewRecipe: React.Dispatch<recipe>
-}
-
-function AddRecipeContainer({ signedInUser }: addRecipeProps) {
+function AddRecipeContainer({ signedInUser }: signedInUserProp) {
   const defaultRecipe:recipe = {
-    active_time: 'defaultTime',
+    active_time: '',
     group: [''],
-    ingredients: { default: 'default' },
+    ingredients: { },
     method: [],
     name: '',
     servings: 0,
     tags: [''],
-    total_time: 'defaultTotal',
+    total_time: '',
   };
 
   // TODO: error handling for form inputs
@@ -35,26 +28,33 @@ function AddRecipeContainer({ signedInUser }: addRecipeProps) {
   const [newRecipe, setNewRecipe] = useState<recipe>(defaultRecipe);
   if (!signedInUser) return <Navigate to="/login" />;
   return (
-    <Box>
-      <Tabs size="lg">
+    <Flex maxW="350px" minH="200px" justify="center">
+      <Tabs>
         <TabList>
           <Tab>Name</Tab>
           <Tab>Ingredients</Tab>
           <Tab>Method</Tab>
+          <Tab>Extras</Tab>
         </TabList>
-        <TabPanels>
-          <TabPanel>
-            <AddName newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
-          </TabPanel>
-          <TabPanel>
-            <AddIngredients newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
-          </TabPanel>
-          <TabPanel>
-            <AddMethod newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
-          </TabPanel>
-        </TabPanels>
+        <Box w="100%">
+          <TabPanels>
+            <TabPanel>
+              <AddName newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
+            </TabPanel>
+            <TabPanel>
+              <AddIngredients newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
+            </TabPanel>
+            <TabPanel>
+              <AddMethod newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
+            </TabPanel>
+            <TabPanel>
+              <AddMisc newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
+            </TabPanel>
+          </TabPanels>
+        </Box>
+        <SubmitRecipeButton userId={signedInUser.uid} newRecipe={newRecipe} />
       </Tabs>
-    </Box>
+    </Flex>
   );
 }
 

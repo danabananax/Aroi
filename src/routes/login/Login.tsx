@@ -4,13 +4,9 @@ import { Button } from '@chakra-ui/react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import LoginForm from './LoginForm';
 import { auth } from '../../firebase';
-import { Iuser } from '../../App';
+import { signedInUserProp } from '../../types';
 
-interface LoginProps {
-  signedInUser: Iuser
-}
-
-function Login({ signedInUser }: LoginProps) {
+function Login({ signedInUser }: signedInUserProp) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loadingSubmit, setLoadingSubmit] = useState(false);
