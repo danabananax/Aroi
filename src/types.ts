@@ -14,6 +14,10 @@ export interface recipe {
     total_time: string
 }
 
+export interface recipeEntry {
+  [key: string]: recipe
+}
+
 export interface ViewRecipeProps {
   signedInUser: Iuser | undefined
   selectedRecipe: recipe | undefined

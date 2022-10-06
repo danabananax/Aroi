@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import {
   Box, Skeleton,
 } from '@chakra-ui/react';
-import { doc, getDoc } from 'firebase/firestore';
+import {
+  doc, getDoc,
+} from 'firebase/firestore';
 import { db } from '../../firebase';
 import RecipeLink from '../components/RecipeLink';
 import { recipe } from '../../types';
@@ -13,14 +15,19 @@ interface HomeDataProps {
 }
 
 function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
-  const [userRecipes, setUserRecipes] = useState([]);
+  const [userRecipes, setUserRecipes] = useState<recipe[]>([]);
   const [loadingRecipes, setLoadingRecipes] = useState(true);
 
   const getRecipes = async () => {
     try {
-      const userRecipesDoc = doc(db, 'users', userId);
-      const userDoc = await getDoc(userRecipesDoc);
-      await setUserRecipes(userDoc.data()?.recipes);
+      const userRecipesCollectionRef = doc(db, 'users', userId);
+      const userDoc = await getDoc(userRecipesCollectionRef);
+      const userData = userDoc.data();
+      if (userData) {
+        const recipeMap : Map<string, recipe> = userData.recipes;
+        const recipeList : recipe[] = Object.values(recipeMap);
+        setUserRecipes(recipeList);
+      } else throw new Error('No recipes');
     } catch (e) {
       console.log(e);
     }
@@ -36,7 +43,7 @@ function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
   return (
     <Box>
       <Skeleton isLoaded={!loadingRecipes}>
-        {!loadingRecipes && userRecipes.length !== 0
+        {!loadingRecipes && Object.keys(userRecipes).length !== 0
         && userRecipes.map((recipe: recipe) => (
           <RecipeLink
             recipe={recipe}

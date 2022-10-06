@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Button } from '@chakra-ui/react';
-import {
-  arrayUnion, doc, updateDoc,
-} from 'firebase/firestore';
-import { recipe } from '../types';
+import { v4 as uuidv4 } from 'uuid';
+import { doc, setDoc } from 'firebase/firestore';
+import { recipe, recipeEntry } from '../types';
 import { db } from '../firebase';
 
 interface submitRecipeButtonProps {
@@ -25,11 +24,18 @@ function SubmitRecipeButton({ newRecipe, userId }: submitRecipeButtonProps) {
 
   const handleSubmitRecipe = async () => {
     await setSubmitLoading(true);
+    const key = uuidv4();
+    const newRecipeEntry:recipeEntry = {};
+    newRecipeEntry[key] = newRecipe;
     const userRef = doc(db, 'users', userId);
-    updateDoc(userRef, {
-      recipes: arrayUnion(newRecipe),
-    })
-      .then(() => { setSubmitLoading(false); });
+
+    setDoc(
+      userRef,
+      { recipes: newRecipeEntry },
+      { merge: true },
+    )
+      .then(() => { setSubmitLoading(false); })
+      .catch((e) => console.log(e));
   };
 
   return (
