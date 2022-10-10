@@ -34,7 +34,6 @@ function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
   };
 
   useEffect(() => {
-    setLoadingRecipes(true);
     getRecipes().then(() => {
       setLoadingRecipes(false);
     });

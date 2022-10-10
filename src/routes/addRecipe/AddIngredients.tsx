@@ -1,8 +1,10 @@
 import React, { useRef, useState } from 'react';
 import {
   Button,
-  Heading, Input, Text,
+  Flex,
+  Heading, IconButton, Input, Text,
 } from '@chakra-ui/react';
+import { DeleteIcon } from '@chakra-ui/icons';
 import { setRecipeProps } from '../../types';
 
 function AddIngredients({ newRecipe, setNewRecipe }: setRecipeProps) {
@@ -11,7 +13,14 @@ function AddIngredients({ newRecipe, setNewRecipe }: setRecipeProps) {
   const [currQuantity, setCurrQuantity] = useState<string>('');
 
   const handleInvalidInput = () => {
-    console.log('Ingredients field must be populated');
+    console.log('Ingredient name field must be populated');
+  };
+
+  const handleRemoveIngredient = (event: React.SyntheticEvent, ingredient: string) => {
+    event.preventDefault();
+    const ingredientList = newRecipe.ingredients;
+    delete ingredientList[ingredient];
+    setNewRecipe({ ...newRecipe, ingredients: ingredientList });
   };
 
   const handleAddIngredient = (event: React.SyntheticEvent) => {
@@ -52,13 +61,22 @@ function AddIngredients({ newRecipe, setNewRecipe }: setRecipeProps) {
         <Button type="submit" display="none" />
       </form>
       {Object.keys(newRecipe.ingredients).map((ingredient) => (
-        <Text key={`id${Math.random().toString(16).slice(2)}`}>
-          {ingredient}
-          {' '}
-          -
-          {' '}
-          {newRecipe.ingredients[ingredient]}
-        </Text>
+        <Flex
+          direction="row"
+          w="100%"
+          justify="space-between"
+          key={`id${Math.random().toString(16).slice(2)}`}
+        >
+          <Text>
+            {`${ingredient} - ${newRecipe.ingredients[ingredient]}`}
+          </Text>
+          <IconButton
+            id={ingredient}
+            aria-label="Delete ingredient from list"
+            icon={<DeleteIcon />}
+            onClick={(e) => { handleRemoveIngredient(e, ingredient); }}
+          />
+        </Flex>
       ))}
     </>
   );
