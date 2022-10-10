@@ -25,6 +25,8 @@ function SubmitRecipeButton({ newRecipe, userId }: submitRecipeButtonProps) {
   const handleSubmitRecipe = async () => {
     await setSubmitLoading(true);
     const key = uuidv4();
+    const newRecipeShallow = newRecipe;
+    newRecipeShallow.id = key;
     const newRecipeEntry:recipeEntry = {};
     newRecipeEntry[key] = newRecipe;
     const userRef = doc(db, 'users', userId);

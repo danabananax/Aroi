@@ -21,6 +21,7 @@ function AddRecipeContainer({ signedInUser }: signedInUserProp) {
     servings: 0,
     tags: [''],
     total_time: '',
+    id: '',
   };
 
   // TODO: error handling for form inputs

@@ -18,6 +18,9 @@ function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
   const [userRecipes, setUserRecipes] = useState<recipe[]>([]);
   const [loadingRecipes, setLoadingRecipes] = useState(true);
 
+  /**
+   * Fetches recipes from user data on firebase
+   */
   const getRecipes = async () => {
     try {
       const userRecipesCollectionRef = doc(db, 'users', userId);
