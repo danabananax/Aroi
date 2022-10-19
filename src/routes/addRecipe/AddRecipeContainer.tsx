@@ -1,8 +1,8 @@
 import {
   Box, Flex, Tab, TabList, TabPanel, TabPanels, Tabs,
 } from '@chakra-ui/react';
-import React, { useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Navigate, useLocation } from 'react-router-dom';
 import BackButton from '../../components/BackButton';
 import SubmitRecipeButton from '../../components/SubmitRecipeButton';
 import { recipe, signedInUserProp } from '../../types';
@@ -21,13 +21,15 @@ function AddRecipeContainer({ signedInUser }: signedInUserProp) {
     servings: 0,
     tags: [''],
     total_time: '',
-    id: '',
   };
 
-  // TODO: error handling for form inputs
-  // TODO: successfully submit recipe to firebase
-
   const [newRecipe, setNewRecipe] = useState<recipe>(defaultRecipe);
+  const location = useLocation();
+  useEffect(() => {
+    const recipe = location.state as recipe | null;
+    if (recipe) setNewRecipe(recipe);
+  }, []);
+
   if (!signedInUser) return <Navigate to="/login" />;
   return (
     <Flex maxW="350px" minH="200px" justify="center">

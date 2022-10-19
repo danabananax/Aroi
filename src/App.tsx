@@ -47,6 +47,7 @@ function App() {
                 <Route path="add" element={<AddRecipeContainer signedInUser={signedInUser} />} />
                 <Route path="login" element={<Login signedInUser={signedInUser} />} />
                 <Route path="register" element={<Register signedInUser={signedInUser} />} />
+                <Route path="edit" element={<AddRecipeContainer signedInUser={signedInUser} />} />
                 <Route
                   path="recipe"
                   element={(

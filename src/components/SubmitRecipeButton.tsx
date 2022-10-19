@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Button } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
-import { doc, setDoc } from 'firebase/firestore';
-import { recipe, recipeEntry } from '../types';
+import { doc, updateDoc } from 'firebase/firestore';
+import { recipe } from '../types';
 import { db } from '../firebase';
 
 interface submitRecipeButtonProps {
@@ -23,21 +23,26 @@ function SubmitRecipeButton({ newRecipe, userId }: submitRecipeButtonProps) {
     && servings);
 
   const handleSubmitRecipe = async () => {
-    await setSubmitLoading(true);
-    const key = uuidv4();
-    const newRecipeShallow = newRecipe;
-    newRecipeShallow.id = key;
-    const newRecipeEntry:recipeEntry = {};
-    newRecipeEntry[key] = newRecipe;
-    const userRef = doc(db, 'users', userId);
+    // if key exists, post with current key
+    const oldKey = newRecipe.id;
+    setSubmitLoading(true);
+    let newRecipeEntry:recipe;
+    if (newRecipe.id) {
+      newRecipeEntry = newRecipe;
+    } else {
+    // else make a new one
+      newRecipeEntry = newRecipe;
+      newRecipeEntry.id = uuidv4();
+    }
 
-    setDoc(
-      userRef,
-      { recipes: newRecipeEntry },
-      { merge: true },
-    )
-      .then(() => { setSubmitLoading(false); })
-      .catch((e) => console.log(e));
+    await setSubmitLoading(true);
+    console.log(oldKey, newRecipeEntry.id);
+    if (newRecipeEntry.id) {
+      const recipesMapRef = doc(db, 'users', userId);
+      updateDoc(recipesMapRef, { [`recipes.${newRecipeEntry.id}`]: newRecipeEntry })
+        .then(() => { setSubmitLoading(false); })
+        .catch((e) => console.log(e));
+    }
   };
 
   return (

@@ -5,6 +5,7 @@ import {
 import { Navigate } from 'react-router-dom';
 import BackButton from '../../components/BackButton';
 import { ViewRecipeProps } from '../../types';
+import EditRecipeButton from '../components/EditRecipeButton';
 
 function ViewRecipeLayout({ signedInUser, selectedRecipe }: ViewRecipeProps) {
   const userId = signedInUser?.uid;
@@ -13,6 +14,7 @@ function ViewRecipeLayout({ signedInUser, selectedRecipe }: ViewRecipeProps) {
     <div>
       <Heading size="3xl">View Recipe</Heading>
       <BackButton />
+      <EditRecipeButton recipe={selectedRecipe} />
       <Fade in>
         <Heading>{selectedRecipe.name}</Heading>
         <Box m={6}>

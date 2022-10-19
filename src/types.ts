@@ -12,7 +12,7 @@ export interface recipe {
     servings: number
     tags: Array<string>
     total_time: string
-    id: string
+    id?: string
 }
 
 export interface recipeEntry {
