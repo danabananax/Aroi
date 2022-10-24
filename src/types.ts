@@ -28,6 +28,11 @@ export interface signedInUserProp {
     signedInUser: Iuser
 }
 
+export interface deleteRecipeProps {
+  userId: string
+  keyToDelete: string | undefined
+}
+
 export interface setRecipeProps {
   newRecipe: recipe
   setNewRecipe: React.Dispatch<recipe>

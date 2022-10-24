@@ -6,6 +6,7 @@ import { Navigate } from 'react-router-dom';
 import BackButton from '../../components/BackButton';
 import { ViewRecipeProps } from '../../types';
 import EditRecipeButton from '../components/EditRecipeButton';
+import DeleteRecipeButton from '../components/DeleteRecipeButton';
 
 function ViewRecipeLayout({ signedInUser, selectedRecipe }: ViewRecipeProps) {
   const userId = signedInUser?.uid;
@@ -15,6 +16,7 @@ function ViewRecipeLayout({ signedInUser, selectedRecipe }: ViewRecipeProps) {
       <Heading size="3xl">View Recipe</Heading>
       <BackButton />
       <EditRecipeButton recipe={selectedRecipe} />
+      <DeleteRecipeButton keyToDelete={selectedRecipe.id} userId={userId} />
       <Fade in>
         <Heading>{selectedRecipe.name}</Heading>
         <Box m={6}>
