@@ -33,6 +33,11 @@ export interface deleteRecipeProps {
   keyToDelete: string | undefined
 }
 
+export interface RecipeLinkProps {
+    recipe: recipe
+    setSelectedRecipe: React.Dispatch<recipe>
+}
+
 export interface setRecipeProps {
   newRecipe: recipe
   setNewRecipe: React.Dispatch<recipe>

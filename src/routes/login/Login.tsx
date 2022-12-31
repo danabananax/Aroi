@@ -20,6 +20,7 @@ function Login({ signedInUser }: signedInUserProp) {
         setLoadingSubmit(false);
       })
       .catch((error) => {
+        // TODO: Implement actual error handling in login page with user feedback
         const errorCode = error.code;
         const errorMessage = error.message;
         console.error(errorCode, errorMessage);

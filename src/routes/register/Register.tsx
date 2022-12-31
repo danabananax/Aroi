@@ -14,10 +14,10 @@ function Register({ signedInUser }: signedInUserProp) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setLoadingSubmit(true);
-    console.log('handlesubmit being run');
     createUserWithEmailAndPassword(auth, email, password)
-      .then(() => { console.log('successfully registered'); setLoadingSubmit(false); })
+      .then(() => { console.log('successfully registered: ', email); setLoadingSubmit(false); })
       .catch((error) => {
+        // TODO: Implement actual error handling in login page with user feedback
         const errorCode = error.code;
         const errorMessage = error.message;
         console.error(errorCode, errorMessage);

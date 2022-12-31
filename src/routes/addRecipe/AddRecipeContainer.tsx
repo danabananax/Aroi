@@ -25,11 +25,18 @@ function AddRecipeContainer({ signedInUser }: signedInUserProp) {
 
   const [newRecipe, setNewRecipe] = useState<recipe>(defaultRecipe);
   const location = useLocation();
+
   useEffect(() => {
-    const recipe = location.state as recipe | null;
-    if (recipe) setNewRecipe(recipe);
+    const locationState = location.state as recipe;
+    console.log(locationState);
+    if (locationState) {
+      console.log(`Recipe exists, so we set with: ${JSON.stringify(locationState)}`);
+      setNewRecipe(locationState);
+    }
   }, []);
 
+  // TODO: Update layout and UI corresponding to Figma design
+  // TODO: seperate add recipe business logic and UI code
   if (!signedInUser) return <Navigate to="/login" />;
   return (
     <Flex maxW="350px" minH="200px" justify="center">

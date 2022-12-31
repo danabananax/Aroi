@@ -11,6 +11,7 @@ import DeleteRecipeButton from '../components/DeleteRecipeButton';
 function ViewRecipeLayout({ signedInUser, selectedRecipe }: ViewRecipeProps) {
   const userId = signedInUser?.uid;
 
+  // TODO: Implement desktop layout corresponding to design on Figma
   return userId && selectedRecipe ? (
     <div>
       <Heading size="3xl">View Recipe</Heading>

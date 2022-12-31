@@ -4,12 +4,7 @@ import {
   Flex, Heading, Box, Text,
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
-import { recipe } from '../types';
-
-interface RecipeLinkProps {
-    recipe: recipe
-    setSelectedRecipe: React.Dispatch<recipe>
-}
+import { RecipeLinkProps } from '../types';
 
 function RecipeLink({ recipe, setSelectedRecipe }: RecipeLinkProps) {
   const navigate = useNavigate();
@@ -18,7 +13,7 @@ function RecipeLink({ recipe, setSelectedRecipe }: RecipeLinkProps) {
     setSelectedRecipe(recipe);
     navigate('/recipe');
   };
-
+  // TODO: Modify existing cards corresponding to the design
   return (
     <Flex
       direction="row"

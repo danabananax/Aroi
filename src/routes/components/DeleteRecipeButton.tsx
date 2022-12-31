@@ -10,7 +10,9 @@ import {
   ModalOverlay,
   useDisclosure,
 } from '@chakra-ui/react';
-import { deleteField, doc, updateDoc } from 'firebase/firestore';
+import {
+  deleteDoc, doc,
+} from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import { db } from '../../firebase';
 import { deleteRecipeProps } from '../../types';
@@ -22,11 +24,13 @@ function DeleteRecipeButton({ keyToDelete, userId }: deleteRecipeProps) {
 
   const handleDeleteRecipe = () => {
     setLoadingDelete(true);
-    const recipesMapRef = doc(db, 'users', userId);
-    updateDoc(recipesMapRef, { [`recipes.${keyToDelete}`]: deleteField() })
-      .then(() => { navigate('/'); })
-      .catch((e) => console.log(e))
-      .finally(() => setLoadingDelete(false));
+    if (keyToDelete) {
+      const recipesToDeleteRef = doc(db, 'users', userId, 'recipes', keyToDelete);
+      deleteDoc(recipesToDeleteRef)
+        .then(() => { navigate('/'); })
+        .catch((e) => console.log(e))
+        .finally(() => setLoadingDelete(false));
+    }
   };
 
   return (
@@ -38,7 +42,7 @@ function DeleteRecipeButton({ keyToDelete, userId }: deleteRecipeProps) {
           <ModalHeader>Delete Recipe</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            Are you sure you want to delete this recipe?
+            {`Are you sure you want to delete this (${keyToDelete}) recipe?`}
           </ModalBody>
           <ModalFooter>
             <Button isLoading={loadingDelete} colorScheme="blue" mr={3} onClick={handleDeleteRecipe}>

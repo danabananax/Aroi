@@ -3,7 +3,7 @@ import {
   Box, Skeleton,
 } from '@chakra-ui/react';
 import {
-  doc, getDoc,
+  collection, getDocs,
 } from 'firebase/firestore';
 import { db } from '../../firebase';
 import RecipeLink from '../components/RecipeLink';
@@ -19,18 +19,20 @@ function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
   const [loadingRecipes, setLoadingRecipes] = useState(true);
 
   /**
-   * Fetches recipes from user data on firebase
+   * Updates state with list of recipes authored by user
+   * @throws console log of error if current user is not defined
    */
+  // TODO: Implement user feedback if no recipes
   const getRecipes = async () => {
+    setLoadingRecipes(true);
     try {
-      const userRecipesCollectionRef = doc(db, 'users', userId);
-      const userDoc = await getDoc(userRecipesCollectionRef);
-      const userData = userDoc.data();
-      if (userData) {
-        const recipeMap : Map<string, recipe> = userData.recipes;
-        const recipeList : recipe[] = Object.values(recipeMap);
-        setUserRecipes(recipeList);
-      } else throw new Error('No recipes');
+      const userRecipesCollectionRef = collection(db, 'users', userId, 'recipes');
+      const userRecipesSnapshot = await getDocs(userRecipesCollectionRef);
+      setUserRecipes(
+        userRecipesSnapshot.docs.map(
+          (recipeSnapshot) => ({ ...recipeSnapshot.data(), id: recipeSnapshot.id } as recipe),
+        ),
+      );
     } catch (e) {
       console.log(e);
     }
@@ -41,7 +43,7 @@ function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
       setLoadingRecipes(false);
     });
   }, []);
-
+  // TODO: Implement fade-in for dynamic data
   return (
     <Box>
       <Skeleton isLoaded={!loadingRecipes}>
