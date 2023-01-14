@@ -63,8 +63,8 @@ function AddRecipeContainer({ signedInUser }: signedInUserProp) {
             </TabPanel>
           </TabPanels>
         </Box>
-        <SubmitRecipeButton userId={signedInUser.uid} newRecipe={newRecipe} />
         <BackButton />
+        <SubmitRecipeButton userId={signedInUser.uid} newRecipe={newRecipe} />
       </Tabs>
     </Flex>
   );

@@ -19,7 +19,7 @@ import { DeleteIcon } from '@chakra-ui/icons';
 import { db } from '../../firebase';
 import { deleteRecipeProps } from '../../types';
 
-function DeleteRecipeButton({ keyToDelete, userId }: deleteRecipeProps) {
+function DeleteRecipeButton({ keyToDelete, recipeName, userId }: deleteRecipeProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [loadingDelete, setLoadingDelete] = useState(false);
   const navigate = useNavigate();
@@ -44,7 +44,7 @@ function DeleteRecipeButton({ keyToDelete, userId }: deleteRecipeProps) {
           <ModalHeader>Delete Recipe</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            {`Are you sure you want to delete this (${keyToDelete}) recipe?`}
+            {`Are you sure you want to delete this ${recipeName} recipe?`}
           </ModalBody>
           <ModalFooter>
             <Button isLoading={loadingDelete} colorScheme="blue" mr={3} onClick={handleDeleteRecipe}>

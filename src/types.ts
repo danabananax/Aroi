@@ -31,6 +31,7 @@ export interface signedInUserProp {
 export interface deleteRecipeProps {
   userId: string
   keyToDelete: string | undefined
+  recipeName: string | undefined
 }
 
 export interface RecipeLinkProps {

@@ -45,19 +45,23 @@ function AddIngredients({ newRecipe, setNewRecipe }: setRecipeProps) {
     <>
       <Heading>Add Ingredients</Heading>
       <form onSubmit={handleAddIngredient}>
-        <Input
-          placeholder="Ingredient"
-          onChange={(e) => setCurrIngredient(e.target.value)}
-          name="ingredients"
-          value={currIngredient}
-          ref={ingredientInput}
-        />
-        <Input
-          placeholder="Quantity"
-          onChange={(e) => setCurrQuantity(e.target.value)}
-          name="quantity"
-          value={currQuantity}
-        />
+        <Flex direction="row" justify="space-evenly" py={2}>
+          <Input
+            placeholder="Ingredient"
+            onChange={(e) => setCurrIngredient(e.target.value)}
+            name="ingredients"
+            value={currIngredient}
+            ref={ingredientInput}
+            mr={1}
+          />
+          <Input
+            placeholder="Quantity"
+            onChange={(e) => setCurrQuantity(e.target.value)}
+            name="quantity"
+            value={currQuantity}
+            ml={1}
+          />
+        </Flex>
         <Button type="submit" display="none" />
       </form>
       {Object.keys(newRecipe.ingredients).map((ingredient) => (

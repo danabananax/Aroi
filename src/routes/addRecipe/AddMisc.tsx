@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Box,
   Heading, Input,
 } from '@chakra-ui/react';
 import { setRecipeProps } from '../../types';
@@ -23,21 +24,23 @@ function AddMisc({ newRecipe, setNewRecipe }: setRecipeProps) {
   return (
     <>
       <Heading>Add Misc</Heading>
-      <Input
-        onChange={handleServingsChange}
-        placeholder="Servings"
-        value={(newRecipe.servings) || ''}
-      />
-      <Input
-        onChange={handleActiveTimeChange}
-        placeholder="Active time"
-        value={newRecipe.active_time}
-      />
-      <Input
-        onChange={handleTotalTimeChange}
-        placeholder="Total time"
-        value={newRecipe.total_time}
-      />
+      <Box py={2}>
+        <Input
+          onChange={handleServingsChange}
+          placeholder="Servings"
+          value={(newRecipe.servings) || ''}
+        />
+        <Input
+          onChange={handleActiveTimeChange}
+          placeholder="Active time"
+          value={newRecipe.active_time}
+        />
+        <Input
+          onChange={handleTotalTimeChange}
+          placeholder="Total time"
+          value={newRecipe.total_time}
+        />
+      </Box>
     </>
   );
 }

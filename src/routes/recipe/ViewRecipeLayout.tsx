@@ -17,7 +17,11 @@ function ViewRecipeLayout({ signedInUser, selectedRecipe }: ViewRecipeProps) {
       <Flex direction="row" justifyContent="space-between" width="100%" mb={8}>
         <BackButton />
         <EditRecipeButton recipe={selectedRecipe} />
-        <DeleteRecipeButton keyToDelete={selectedRecipe.id} userId={userId} />
+        <DeleteRecipeButton
+          keyToDelete={selectedRecipe.id}
+          recipeName={selectedRecipe.name}
+          userId={userId}
+        />
       </Flex>
       <Heading textAlign="left" size="3xl">{selectedRecipe.name}</Heading>
       <Flex textAlign="left" direction="row" justifyContent="space-between" width="100%" py={8}>

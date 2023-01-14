@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import {
+  Box,
   Button, Flex, Heading, IconButton, Input, Text,
 } from '@chakra-ui/react';
 import { DeleteIcon } from '@chakra-ui/icons';
@@ -30,12 +31,14 @@ function AddMethod({ newRecipe, setNewRecipe }: setRecipeProps) {
     <>
       <Heading>Add Method</Heading>
       <form onSubmit={handleAddStep}>
-        <Input
-          onChange={(e) => setCurrStep(e.target.value)}
-          placeholder="Method step"
-          value={currStep}
-          ref={methodInput}
-        />
+        <Box py={2}>
+          <Input
+            onChange={(e) => setCurrStep(e.target.value)}
+            placeholder="Method step"
+            value={currStep}
+            ref={methodInput}
+          />
+        </Box>
         <Button type="submit" display="none" />
       </form>
       {newRecipe.method.map((step) => (
