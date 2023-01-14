@@ -1,6 +1,7 @@
 import React from 'react';
-import { Button } from '@chakra-ui/react';
+import { IconButton } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
+import { ArrowBackIcon } from '@chakra-ui/icons';
 
 function BackButton() {
   const navigate = useNavigate();
@@ -9,9 +10,7 @@ function BackButton() {
   };
 
   return (
-    <Button onClick={handleBack} m={2}>
-      Back
-    </Button>
+    <IconButton icon={<ArrowBackIcon boxSize="32px" />} variant="ghost" aria-label="Back button" onClick={handleBack} />
   );
 }
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Box, Fade, Flex, Heading,
+  Box, Flex, Heading, Text,
 } from '@chakra-ui/react';
 import { Navigate } from 'react-router-dom';
 import BackButton from '../../components/BackButton';
@@ -13,30 +13,36 @@ function ViewRecipeLayout({ signedInUser, selectedRecipe }: ViewRecipeProps) {
 
   // TODO: Implement desktop layout corresponding to design on Figma
   return userId && selectedRecipe ? (
-    <div>
-      <Heading size="3xl">View Recipe</Heading>
-      <BackButton />
-      <EditRecipeButton recipe={selectedRecipe} />
-      <DeleteRecipeButton keyToDelete={selectedRecipe.id} userId={userId} />
-      <Fade in>
-        <Heading>{selectedRecipe.name}</Heading>
-        <Box m={6}>
+    <Box width="100vw" px={32}>
+      <Flex direction="row" justifyContent="space-between" width="100%" mb={8}>
+        <BackButton />
+        <EditRecipeButton recipe={selectedRecipe} />
+        <DeleteRecipeButton keyToDelete={selectedRecipe.id} userId={userId} />
+      </Flex>
+      <Heading textAlign="left" size="3xl">{selectedRecipe.name}</Heading>
+      <Flex textAlign="left" direction="row" justifyContent="space-between" width="100%" py={8}>
+        <Box width="35%">
           {Object.keys(selectedRecipe.ingredients).map((key) => (
             <Flex
               justify="space-between"
-              w="350px"
+              w="100%"
               key={`id${Math.random().toString(16).slice(2)}`}
+              mb={2}
             >
-              <Box>{key}</Box>
-              <Box>{selectedRecipe.ingredients[key]}</Box>
+              <Text fontSize={20}>{key}</Text>
+              <Text fontSize={20}>{selectedRecipe.ingredients[key]}</Text>
             </Flex>
           ))}
         </Box>
-        {selectedRecipe.method.map((method) => (
-          <Box key={`id${Math.random().toString(16).slice(2)}`}>{method}</Box>
-        ))}
-      </Fade>
-    </div>
+        <Box width="30%">
+          {selectedRecipe.method.map((method, idx) => (
+            <Text fontSize={20} mb={2} key={`id${Math.random().toString(16).slice(2)}`}>
+              {`${idx + 1}. ${method}`}
+            </Text>
+          ))}
+        </Box>
+      </Flex>
+    </Box>
   )
     : <Navigate to="/login" />;
 }

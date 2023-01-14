@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Box, Skeleton,
+  Box, Skeleton, Text,
 } from '@chakra-ui/react';
 import {
   collection, getDocs,
@@ -22,7 +22,6 @@ function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
    * Updates state with list of recipes authored by user
    * @throws console log of error if current user is not defined
    */
-  // TODO: Implement user feedback if no recipes
   const getRecipes = async () => {
     setLoadingRecipes(true);
     try {
@@ -55,6 +54,9 @@ function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
             key={`id${Math.random().toString(16).slice(2)}`}
           />
         ))}
+        {!loadingRecipes
+        && userRecipes.length < 1
+        && <Text fontSize="4xl">No recipes to display, click &apos;Add Recipe&apos;.</Text>}
       </Skeleton>
     </Box>
   );

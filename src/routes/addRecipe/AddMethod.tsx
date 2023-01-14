@@ -49,6 +49,7 @@ function AddMethod({ newRecipe, setNewRecipe }: setRecipeProps) {
           <IconButton
             aria-label="delete step from instructions"
             icon={<DeleteIcon />}
+            variant="ghost"
             onClick={(e) => { handleRemoveStep(e, step); }}
           />
         </Flex>

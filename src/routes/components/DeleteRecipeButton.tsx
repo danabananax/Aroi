@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {
   Button,
+  IconButton,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -14,6 +15,7 @@ import {
   deleteDoc, doc,
 } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
+import { DeleteIcon } from '@chakra-ui/icons';
 import { db } from '../../firebase';
 import { deleteRecipeProps } from '../../types';
 
@@ -35,7 +37,7 @@ function DeleteRecipeButton({ keyToDelete, userId }: deleteRecipeProps) {
 
   return (
     <>
-      <Button onClick={onOpen}>Delete Recipe</Button>
+      <IconButton icon={<DeleteIcon boxSize="32px" />} variant="ghost" aria-label="Delete recipe button" onClick={onOpen} />
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>

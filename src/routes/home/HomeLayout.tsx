@@ -1,5 +1,5 @@
 import {
-  Button, Box, Heading,
+  Button, Box,
 } from '@chakra-ui/react';
 import { signOut } from 'firebase/auth';
 import React, { useState } from 'react';
@@ -27,7 +27,6 @@ function Home({ signedInUser, setSelectedRecipe }: HomeProps) {
   if (!signedInUser) return <Navigate to="/login" />;
   return (
     <Box>
-      <Heading size="3xl">Home</Heading>
       <Button
         isLoading={logoutLoading}
         onClick={handleLogout}

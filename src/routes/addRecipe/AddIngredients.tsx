@@ -74,6 +74,7 @@ function AddIngredients({ newRecipe, setNewRecipe }: setRecipeProps) {
             id={ingredient}
             aria-label="Delete ingredient from list"
             icon={<DeleteIcon />}
+            variant="ghost"
             onClick={(e) => { handleRemoveIngredient(e, ingredient); }}
           />
         </Flex>

@@ -33,7 +33,7 @@ function SubmitRecipeButton({ newRecipe, userId }: submitRecipeButtonProps) {
       ? doc(db, 'users', userId, 'recipes', newRecipeCopy.id)
       : doc(collection(db, 'users', userId, 'recipes'));
     try {
-      await setDoc(newRecipeDocRef, newRecipeCopy, { merge: true });
+      await setDoc(newRecipeDocRef, newRecipeCopy);
     } catch (e) {
       console.log(e);
     } finally {

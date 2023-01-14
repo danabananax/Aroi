@@ -1,6 +1,6 @@
 import {
   Box,
-  Center, Heading, Skeleton, Text,
+  Center, Skeleton,
 } from '@chakra-ui/react';
 import { onAuthStateChanged } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
@@ -38,10 +38,8 @@ function App() {
     <BrowserRouter>
       <Center minW="60vw" h="100vh">
         <Box h="100%">
-          <Heading fontSize="8xl" m={6}>aroi</Heading>
           <Box pt="6em">
             <Skeleton isLoaded={!loadingAuth}>
-              <Text fontSize="4xl">{ signedInUser ? 'signed in' : 'signed out' }</Text>
               <Routes>
                 <Route path="/" element={<HomeLayout signedInUser={signedInUser} setSelectedRecipe={setSelectedRecipe} />} />
                 <Route path="add" element={<AddRecipeContainer signedInUser={signedInUser} />} />
@@ -55,7 +53,7 @@ function App() {
                       signedInUser={signedInUser}
                       selectedRecipe={selectedRecipe}
                     />
-)}
+                  )}
                 />
               </Routes>
             </Skeleton>
