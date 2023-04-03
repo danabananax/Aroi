@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import {
   Button,
+  Fade,
   Flex,
   Heading, IconButton, Input, Text,
 } from '@chakra-ui/react';
@@ -65,23 +66,25 @@ function AddIngredients({ newRecipe, setNewRecipe }: setRecipeProps) {
         <Button type="submit" display="none" />
       </form>
       {Object.keys(newRecipe.ingredients).map((ingredient) => (
-        <Flex
-          direction="row"
-          w="100%"
-          justify="space-between"
-          key={`id${Math.random().toString(16).slice(2)}`}
-        >
-          <Text>
-            {`${ingredient} - ${newRecipe.ingredients[ingredient]}`}
-          </Text>
-          <IconButton
-            id={ingredient}
-            aria-label="Delete ingredient from list"
-            icon={<DeleteIcon />}
-            variant="ghost"
-            onClick={(e) => { handleRemoveIngredient(e, ingredient); }}
-          />
-        </Flex>
+        <Fade in>
+          <Flex
+            direction="row"
+            w="100%"
+            justify="space-between"
+            key={`id${Math.random().toString(16).slice(2)}`}
+          >
+            <Text>
+              {`${ingredient} - ${newRecipe.ingredients[ingredient]}`}
+            </Text>
+            <IconButton
+              id={ingredient}
+              aria-label="Delete ingredient from list"
+              icon={<DeleteIcon />}
+              variant="ghost"
+              onClick={(e) => { handleRemoveIngredient(e, ingredient); }}
+            />
+          </Flex>
+        </Fade>
       ))}
     </>
   );

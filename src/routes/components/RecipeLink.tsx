@@ -4,7 +4,7 @@ import {
   Flex, Heading, Box, Text,
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
-import { recipe } from '../home/HomeData';
+import { recipe } from '../../types';
 
 interface RecipeLinkProps {
     recipe: recipe
@@ -22,16 +22,18 @@ function RecipeLink({ recipe, setSelectedRecipe }: RecipeLinkProps) {
   return (
     <Flex
       as="button"
-      direction="row"
-      w="400px"
-      justify="space-between"
+      direction="column"
+      w="300px"
+      justify="flex-end"
+      alignItems="flex-start"
+      textAlign="left"
       m={2}
       p={4}
       borderRadius="9"
       boxShadow="md"
       onClick={handleLinkClick}
     >
-      <Heading>
+      <Heading size="lg">
         {recipe.name}
       </Heading>
       <Box>

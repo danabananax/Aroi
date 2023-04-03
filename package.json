@@ -9,12 +9,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@chakra-ui/css-reset": "^2.1.1",
     "@chakra-ui/icons": "^2.0.11",
     "@chakra-ui/react": "^2.2.6",
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
     "dotenv": "^16.0.1",
     "firebase": "^9.9.1",
+    "focus-visible": "^5.2.0",
     "framer-motion": "^6.5.1",
     "prettier": "^2.7.1",
     "react": "^18.2.0",

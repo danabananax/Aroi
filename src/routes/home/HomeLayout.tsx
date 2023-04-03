@@ -26,7 +26,7 @@ function Home({ signedInUser, setSelectedRecipe }: HomeProps) {
 
   if (!signedInUser) return <Navigate to="/login" />;
   return (
-    <Box>
+    <Box textAlign="center">
       <Button
         isLoading={logoutLoading}
         onClick={handleLogout}

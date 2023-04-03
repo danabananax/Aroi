@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Box, Skeleton, Text,
+  Box, Fade, Spinner, Text,
 } from '@chakra-ui/react';
 import {
   collection, getDocs,
@@ -42,23 +42,28 @@ function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
       setLoadingRecipes(false);
     });
   }, []);
-  // TODO: Implement fade-in for dynamic data
+
+  if (loadingRecipes) {
+    return (
+      <Box m={6}>
+        <Spinner size="xl" />
+      </Box>
+    );
+  }
   return (
-    <Box>
-      <Skeleton isLoaded={!loadingRecipes}>
-        {!loadingRecipes && Object.keys(userRecipes).length !== 0
-        && userRecipes.map((recipe: recipe) => (
-          <RecipeLink
-            recipe={recipe}
-            setSelectedRecipe={setSelectedRecipe}
-            key={`id${Math.random().toString(16).slice(2)}`}
-          />
-        ))}
-        {!loadingRecipes
-        && userRecipes.length < 1
-        && <Text fontSize="4xl">No recipes to display, click &apos;Add Recipe&apos;.</Text>}
-      </Skeleton>
-    </Box>
+    <Fade in>
+      <Box>
+        {userRecipes.length > 1
+          ? userRecipes.map((recipe: recipe) => (
+            <RecipeLink
+              recipe={recipe}
+              setSelectedRecipe={setSelectedRecipe}
+              key={`id${Math.random().toString(16).slice(2)}`}
+            />
+          ))
+          : <Text fontSize="4xl">No recipes to display, click &apos;Add Recipe&apos;.</Text>}
+      </Box>
+    </Fade>
   );
 }
 
