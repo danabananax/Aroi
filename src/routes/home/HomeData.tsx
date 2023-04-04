@@ -10,7 +10,7 @@ import RecipeLink from '../components/RecipeLink';
 import { recipe } from '../../types';
 
 interface HomeDataProps {
-    userId: string
+    userId: string | undefined
     setSelectedRecipe: React.Dispatch<recipe>
 }
 
@@ -25,6 +25,7 @@ function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
   const getRecipes = async () => {
     setLoadingRecipes(true);
     try {
+      if (!userId) return;
       const userRecipesCollectionRef = collection(db, 'users', userId, 'recipes');
       const userRecipesSnapshot = await getDocs(userRecipesCollectionRef);
       setUserRecipes(

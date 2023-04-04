@@ -6,9 +6,8 @@ import React, { useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase';
 import { HomeProps } from '../../types';
-import HomeData from './HomeData';
 
-function Home({ signedInUser, setSelectedRecipe }: HomeProps) {
+function Home({ signedInUser, homedata }: HomeProps) {
   const [logoutLoading, setLogoutLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -40,7 +39,7 @@ function Home({ signedInUser, setSelectedRecipe }: HomeProps) {
       >
         Add Recipe
       </Button>
-      {signedInUser && <HomeData userId={signedInUser.uid} setSelectedRecipe={setSelectedRecipe} />}
+      { homedata }
     </Box>
   );
 }

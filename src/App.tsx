@@ -14,6 +14,7 @@ import HomeLayout from './routes/home/HomeLayout';
 import ViewRecipeLayout from './routes/recipe/ViewRecipeLayout';
 import { Iuser, recipe } from './types';
 import AddRecipeContainer from './routes/addRecipe/AddRecipeContainer';
+import HomeData from './routes/home/HomeData';
 
 function App() {
   const [signedInUser, setSignedInUser] = useState<Iuser>(auth.currentUser);
@@ -38,10 +39,23 @@ function App() {
     <BrowserRouter>
       <Center minW="60vw" h="100vh">
         <Box h="100%">
-          <Box pt="6em">
+          <Box py="6em">
             <Skeleton isLoaded={!loadingAuth}>
               <Routes>
-                <Route path="/" element={<HomeLayout signedInUser={signedInUser} setSelectedRecipe={setSelectedRecipe} />} />
+                <Route
+                  path="/"
+                  element={(
+                    <HomeLayout
+                      signedInUser={signedInUser}
+                      homedata={(
+                        <HomeData
+                          userId={signedInUser?.uid}
+                          setSelectedRecipe={setSelectedRecipe}
+                        />
+                  )}
+                    />
+                  )}
+                />
                 <Route path="add" element={<AddRecipeContainer signedInUser={signedInUser} />} />
                 <Route path="login" element={<Login signedInUser={signedInUser} />} />
                 <Route path="register" element={<Register signedInUser={signedInUser} />} />

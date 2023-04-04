@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
-import { Button } from '@chakra-ui/react';
+import { Button, Flex } from '@chakra-ui/react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import LoginForm from './LoginForm';
 import { auth } from '../../firebase';
@@ -30,7 +30,7 @@ function Login({ signedInUser }: signedInUserProp) {
 
   if (signedInUser) return <Navigate to="/" />;
   return (
-    <>
+    <Flex flexDirection="column" pt={28}>
       <form onSubmit={handleSubmit}>
         <LoginForm
           email={email}
@@ -41,7 +41,7 @@ function Login({ signedInUser }: signedInUserProp) {
         <Button isLoading={loadingSubmit} type="submit" m={2}>Login</Button>
       </form>
       <Link to="/register">Register</Link>
-    </>
+    </Flex>
   );
 }
 

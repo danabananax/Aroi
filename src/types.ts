@@ -46,5 +46,5 @@ export interface setRecipeProps {
 
 export interface HomeProps {
   signedInUser: Iuser
-  setSelectedRecipe: React.Dispatch<recipe>
+  homedata: React.ReactNode
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button } from '@chakra-ui/react';
+import { Button, Flex } from '@chakra-ui/react';
 import { Link, Navigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import RegisterForm from './RegisterForm';
@@ -26,7 +26,7 @@ function Register({ signedInUser }: signedInUserProp) {
   };
   if (signedInUser) return <Navigate to="/" />;
   return (
-    <>
+    <Flex flexDirection="column" pt={28}>
       <form onSubmit={handleSubmit}>
         <RegisterForm
           email={email}
@@ -39,7 +39,7 @@ function Register({ signedInUser }: signedInUserProp) {
         </Button>
       </form>
       <Link to="/login">Login</Link>
-    </>
+    </Flex>
   );
 }
 
