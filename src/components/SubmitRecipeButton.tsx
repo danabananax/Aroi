@@ -47,7 +47,7 @@ function SubmitRecipeButton({ newRecipe, userId }: submitRecipeButtonProps) {
       isDisabled={!isSubmittable}
       isLoading={submitLoading}
       onClick={handleSubmitRecipe}
-      mt={6}
+      mt={4}
     >
       Submit
     </Button>

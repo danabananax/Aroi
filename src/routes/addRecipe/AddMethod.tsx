@@ -22,7 +22,7 @@ function AddMethod({ newRecipe, setNewRecipe }: setRecipeProps) {
 
   return (
     <>
-      <Heading size="md" mt={4}>Add Method</Heading>
+      <Heading size="md" mt={3}>Add Method</Heading>
       <form onSubmit={handleAddStep}>
         <Box py={2}>
           <Input
@@ -30,7 +30,7 @@ function AddMethod({ newRecipe, setNewRecipe }: setRecipeProps) {
             placeholder="Method step"
             value={currStep}
             ref={methodInput}
-            size="lg"
+            size="md"
           />
         </Box>
         <Button type="submit" display="none" />

@@ -1,4 +1,6 @@
-import { Box, Heading, Text } from '@chakra-ui/react';
+import {
+  Box, Flex, Heading, Text,
+} from '@chakra-ui/react';
 import React from 'react';
 import { setRecipeProps } from '../../types';
 import DeletableEntry from './DeletableEntry';
@@ -18,9 +20,33 @@ function RecipeTempView({ newRecipe, setNewRecipe }: setRecipeProps) {
   };
 
   return (
-    <Box w="400px">
-      <Heading mb={6}>{newRecipe.name}</Heading>
-
+    <Box maxW="500" ml={16}>
+      <Flex mb={6} justify="space-between">
+        <Heading>{newRecipe.name}</Heading>
+        <Box mt={2}>
+          {newRecipe.servings > 0 && (
+          <Text fontSize={11} size="sm" textAlign="right">
+            Servings:
+            {' '}
+            {newRecipe.servings}
+          </Text>
+          )}
+          {newRecipe.active_time && (
+          <Text fontSize={11} size="sm" textAlign="right">
+            Active time:
+            {' '}
+            {newRecipe.active_time}
+          </Text>
+          )}
+          {newRecipe.total_time && (
+          <Text fontSize={11} textAlign="right">
+            Total time:
+            {' '}
+            {newRecipe.total_time}
+          </Text>
+          )}
+        </Box>
+      </Flex>
       {Object.keys(newRecipe.ingredients).map((ingredient) => (
         <DeletableEntry
           identifier={ingredient}
@@ -36,27 +62,6 @@ function RecipeTempView({ newRecipe, setNewRecipe }: setRecipeProps) {
           deleteFunction={handleRemoveStep}
         />
       ))}
-      {newRecipe.servings > 0 && (
-      <Text mt={6}>
-        Servings:
-        {' '}
-        {newRecipe.servings}
-      </Text>
-      )}
-      {newRecipe.active_time && (
-      <Text mt={2}>
-        Active time:
-        {' '}
-        {newRecipe.active_time}
-      </Text>
-      )}
-      {newRecipe.total_time && (
-      <Text mt={2}>
-        Total time:
-        {' '}
-        {newRecipe.total_time}
-      </Text>
-      )}
     </Box>
   );
 }

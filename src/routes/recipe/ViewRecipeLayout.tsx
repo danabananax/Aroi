@@ -24,7 +24,7 @@ function ViewRecipeLayout({ signedInUser, selectedRecipe }: ViewRecipeProps) {
             userId={userId}
           />
         </Flex>
-        <Heading textAlign="left" size="3xl">{selectedRecipe.name}</Heading>
+        <Heading textAlign="left" size="2xl">{selectedRecipe.name}</Heading>
         <Flex textAlign="left" direction="row" justifyContent="space-between" width="100%" py={8}>
           <Box width="35%">
             {Object.keys(selectedRecipe.ingredients).map((key) => (
@@ -39,9 +39,9 @@ function ViewRecipeLayout({ signedInUser, selectedRecipe }: ViewRecipeProps) {
               </Flex>
             ))}
           </Box>
-          <Box width="30%">
+          <Box maxWidth="50%">
             {selectedRecipe.method.map((method, idx) => (
-              <Text fontSize={20} mb={2} key={`id${Math.random().toString(16).slice(2)}`}>
+              <Text fontSize={16} mb={2} key={`id${Math.random().toString(16).slice(2)}`}>
                 {`${idx + 1}. ${method}`}
               </Text>
             ))}

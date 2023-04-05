@@ -11,8 +11,9 @@ function DeletableEntry({ identifier, textContent, deleteFunction }: DeletableEn
       justify="space-between"
       align="center"
       key={`id${Math.random().toString(16).slice(2)}`}
+      mb={1.5}
     >
-      <Text>
+      <Text lineHeight="short">
         {textContent}
       </Text>
       <IconButton

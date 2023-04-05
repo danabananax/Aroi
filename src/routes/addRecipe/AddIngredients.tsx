@@ -36,7 +36,7 @@ function AddIngredients({ newRecipe, setNewRecipe }: setRecipeProps) {
 
   return (
     <>
-      <Heading size="md" mt={4}>Add Ingredients</Heading>
+      <Heading size="md" mt={3}>Add Ingredients</Heading>
       <form onSubmit={handleAddIngredient}>
         <Flex direction="column" justify="space-evenly" py={2}>
           <Input
@@ -46,7 +46,7 @@ function AddIngredients({ newRecipe, setNewRecipe }: setRecipeProps) {
             value={currIngredient}
             ref={ingredientInput}
             mb={2}
-            size="lg"
+            size="md"
           />
           <Input
             placeholder="Quantity"
@@ -54,7 +54,7 @@ function AddIngredients({ newRecipe, setNewRecipe }: setRecipeProps) {
             name="quantity"
             value={currQuantity}
             mb={2}
-            size="lg"
+            size="md"
           />
         </Flex>
         <Button type="submit" display="none" />

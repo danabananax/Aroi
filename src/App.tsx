@@ -36,7 +36,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Box w="100%" h="100vh" py={20} px={20} textAlign="left">
+      <Box w="100%" minH="100vh" py={20} px={20} textAlign="left">
         <Skeleton isLoaded={!loadingAuth}>
           <Routes>
             <Route

@@ -50,7 +50,6 @@ function AddRecipeContainer({ signedInUser }: signedInUserProp) {
         <Box
           textAlign="left"
           width="300px"
-          mb={8}
         >
           <BackButton />
           <AddName newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
