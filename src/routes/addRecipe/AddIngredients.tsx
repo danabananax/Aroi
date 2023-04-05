@@ -1,11 +1,10 @@
 import React, { useRef, useState } from 'react';
 import {
   Button,
-  Fade,
   Flex,
-  Heading, IconButton, Input, Text,
+  Heading,
+  Input,
 } from '@chakra-ui/react';
-import { DeleteIcon } from '@chakra-ui/icons';
 import { setRecipeProps } from '../../types';
 
 function AddIngredients({ newRecipe, setNewRecipe }: setRecipeProps) {
@@ -15,13 +14,6 @@ function AddIngredients({ newRecipe, setNewRecipe }: setRecipeProps) {
 
   const handleInvalidInput = () => {
     console.log('Ingredient name field must be populated');
-  };
-
-  const handleRemoveIngredient = (event: React.SyntheticEvent, ingredient: string) => {
-    event.preventDefault();
-    const ingredientList = newRecipe.ingredients;
-    delete ingredientList[ingredient];
-    setNewRecipe({ ...newRecipe, ingredients: ingredientList });
   };
 
   const handleAddIngredient = (event: React.SyntheticEvent) => {
@@ -44,48 +36,29 @@ function AddIngredients({ newRecipe, setNewRecipe }: setRecipeProps) {
 
   return (
     <>
-      <Heading>Add Ingredients</Heading>
+      <Heading size="md" mt={4}>Add Ingredients</Heading>
       <form onSubmit={handleAddIngredient}>
-        <Flex direction="row" justify="space-evenly" py={2}>
+        <Flex direction="column" justify="space-evenly" py={2}>
           <Input
             placeholder="Ingredient"
             onChange={(e) => setCurrIngredient(e.target.value)}
             name="ingredients"
             value={currIngredient}
             ref={ingredientInput}
-            mr={1}
+            mb={2}
+            size="lg"
           />
           <Input
             placeholder="Quantity"
             onChange={(e) => setCurrQuantity(e.target.value)}
             name="quantity"
             value={currQuantity}
-            ml={1}
+            mb={2}
+            size="lg"
           />
         </Flex>
         <Button type="submit" display="none" />
       </form>
-      {Object.keys(newRecipe.ingredients).map((ingredient) => (
-        <Fade in>
-          <Flex
-            direction="row"
-            w="100%"
-            justify="space-between"
-            key={`id${Math.random().toString(16).slice(2)}`}
-          >
-            <Text>
-              {`${ingredient} - ${newRecipe.ingredients[ingredient]}`}
-            </Text>
-            <IconButton
-              id={ingredient}
-              aria-label="Delete ingredient from list"
-              icon={<DeleteIcon />}
-              variant="ghost"
-              onClick={(e) => { handleRemoveIngredient(e, ingredient); }}
-            />
-          </Flex>
-        </Fade>
-      ))}
     </>
   );
 }

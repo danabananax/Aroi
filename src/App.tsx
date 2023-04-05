@@ -1,6 +1,5 @@
 import {
-  Box,
-  Center, Skeleton,
+  Box, Skeleton,
 } from '@chakra-ui/react';
 import { onAuthStateChanged } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
@@ -37,43 +36,39 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Center minW="60vw" h="100vh">
-        <Box h="100%">
-          <Box py="6em">
-            <Skeleton isLoaded={!loadingAuth}>
-              <Routes>
-                <Route
-                  path="/"
-                  element={(
-                    <HomeLayout
-                      signedInUser={signedInUser}
-                      homedata={(
-                        <HomeData
-                          userId={signedInUser?.uid}
-                          setSelectedRecipe={setSelectedRecipe}
-                        />
-                  )}
+      <Box w="100%" h="100vh" py={20} px={20} textAlign="left">
+        <Skeleton isLoaded={!loadingAuth}>
+          <Routes>
+            <Route
+              path="/"
+              element={(
+                <HomeLayout
+                  signedInUser={signedInUser}
+                  homedata={(
+                    <HomeData
+                      userId={signedInUser?.uid}
+                      setSelectedRecipe={setSelectedRecipe}
                     />
                   )}
                 />
-                <Route path="add" element={<AddRecipeContainer signedInUser={signedInUser} />} />
-                <Route path="login" element={<Login signedInUser={signedInUser} />} />
-                <Route path="register" element={<Register signedInUser={signedInUser} />} />
-                <Route path="edit" element={<AddRecipeContainer signedInUser={signedInUser} />} />
-                <Route
-                  path="recipe"
-                  element={(
-                    <ViewRecipeLayout
-                      signedInUser={signedInUser}
-                      selectedRecipe={selectedRecipe}
-                    />
                   )}
+            />
+            <Route path="add" element={<AddRecipeContainer signedInUser={signedInUser} />} />
+            <Route path="login" element={<Login signedInUser={signedInUser} />} />
+            <Route path="register" element={<Register signedInUser={signedInUser} />} />
+            <Route path="edit" element={<AddRecipeContainer signedInUser={signedInUser} />} />
+            <Route
+              path="recipe"
+              element={(
+                <ViewRecipeLayout
+                  signedInUser={signedInUser}
+                  selectedRecipe={selectedRecipe}
                 />
-              </Routes>
-            </Skeleton>
-          </Box>
-        </Box>
-      </Center>
+                  )}
+            />
+          </Routes>
+        </Skeleton>
+      </Box>
     </BrowserRouter>
   );
 }

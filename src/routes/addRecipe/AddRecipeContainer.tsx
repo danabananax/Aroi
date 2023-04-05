@@ -1,5 +1,5 @@
 import {
-  Box, Center, Fade, Flex, Tab, TabList, TabPanel, TabPanels, Tabs,
+  Box, Fade, Flex,
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
@@ -10,6 +10,7 @@ import AddIngredients from './AddIngredients';
 import AddMethod from './AddMethod';
 import AddMisc from './AddMisc';
 import AddName from './AddName';
+import RecipeTempView from './RecipeTempView';
 
 function AddRecipeContainer({ signedInUser }: signedInUserProp) {
   const defaultRecipe:recipe = {
@@ -40,38 +41,28 @@ function AddRecipeContainer({ signedInUser }: signedInUserProp) {
   if (!signedInUser) return <Navigate to="/login" />;
   return (
     <Fade in>
-      <Box width="100vw" px={32}>
-        <Flex direction="row" justifyContent="flex-start" width="100%" mb={8}>
+      <Flex
+        width="70vw"
+        direction="row"
+        align="flex-start"
+        justify="space-between"
+      >
+        <Box
+          textAlign="left"
+          width="300px"
+          mb={8}
+        >
           <BackButton />
-        </Flex>
-        <Center w="83vw" minH="200px">
-          <Tabs maxW="350px">
-            <TabList>
-              <Tab>Name</Tab>
-              <Tab>Ingredients</Tab>
-              <Tab>Method</Tab>
-              <Tab>Misc</Tab>
-            </TabList>
-            <Box>
-              <TabPanels>
-                <TabPanel>
-                  <AddName newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
-                </TabPanel>
-                <TabPanel>
-                  <AddIngredients newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
-                </TabPanel>
-                <TabPanel>
-                  <AddMethod newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
-                </TabPanel>
-                <TabPanel>
-                  <AddMisc newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
-                </TabPanel>
-              </TabPanels>
-            </Box>
-            <SubmitRecipeButton userId={signedInUser.uid} newRecipe={newRecipe} />
-          </Tabs>
-        </Center>
-      </Box>
+          <AddName newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
+          <AddIngredients newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
+          <AddMethod newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
+          <AddMisc newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
+          <SubmitRecipeButton userId={signedInUser.uid} newRecipe={newRecipe} />
+        </Box>
+        <Box>
+          <RecipeTempView newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
+        </Box>
+      </Flex>
     </Fade>
   );
 }

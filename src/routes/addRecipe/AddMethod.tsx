@@ -1,20 +1,13 @@
 import React, { useRef, useState } from 'react';
 import {
   Box,
-  Button, Flex, Heading, IconButton, Input, Text,
+  Button, Heading, Input,
 } from '@chakra-ui/react';
-import { DeleteIcon } from '@chakra-ui/icons';
 import { setRecipeProps } from '../../types';
 
 function AddMethod({ newRecipe, setNewRecipe }: setRecipeProps) {
   const [currStep, setCurrStep] = useState<string>('');
   const methodInput = useRef<HTMLInputElement>(null);
-
-  const handleRemoveStep = (event: React.SyntheticEvent, stepToRemove: string) => {
-    event.preventDefault();
-    const filteredSteps = newRecipe.method.filter((step) => step !== stepToRemove);
-    setNewRecipe({ ...newRecipe, method: filteredSteps });
-  };
 
   const handleAddStep = (event: React.SyntheticEvent) => {
     event.preventDefault();
@@ -29,7 +22,7 @@ function AddMethod({ newRecipe, setNewRecipe }: setRecipeProps) {
 
   return (
     <>
-      <Heading>Add Method</Heading>
+      <Heading size="md" mt={4}>Add Method</Heading>
       <form onSubmit={handleAddStep}>
         <Box py={2}>
           <Input
@@ -37,26 +30,11 @@ function AddMethod({ newRecipe, setNewRecipe }: setRecipeProps) {
             placeholder="Method step"
             value={currStep}
             ref={methodInput}
+            size="lg"
           />
         </Box>
         <Button type="submit" display="none" />
       </form>
-      {newRecipe.method.map((step) => (
-        <Flex
-          direction="row"
-          w="100%"
-          justify="space-between"
-          key={`id${Math.random().toString(16).slice(2)}`}
-        >
-          <Text>{step}</Text>
-          <IconButton
-            aria-label="delete step from instructions"
-            icon={<DeleteIcon />}
-            variant="ghost"
-            onClick={(e) => { handleRemoveStep(e, step); }}
-          />
-        </Flex>
-      ))}
     </>
   );
 }

@@ -10,12 +10,13 @@ function AddName({ newRecipe, setNewRecipe }: setRecipeProps) {
 
   return (
     <>
-      <Heading>Add name</Heading>
+      <Heading size="md" mt={8}>Add name</Heading>
       <Box py={2}>
         <Input
           onChange={handleNameChange}
           placeholder="Recipe name"
           value={newRecipe.name}
+          size="lg"
         />
       </Box>
     </>

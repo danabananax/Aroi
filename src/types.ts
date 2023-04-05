@@ -48,3 +48,11 @@ export interface HomeProps {
   signedInUser: Iuser
   homedata: React.ReactNode
 }
+
+// eslint-disable-next-line no-unused-vars
+type deleteFunction = (event: React.MouseEvent, identifier: string) => void;
+export interface DeletableEntryProps {
+  textContent: string
+  identifier: string
+  deleteFunction: deleteFunction
+}
