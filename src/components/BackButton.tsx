@@ -6,7 +6,7 @@ import { ArrowBackIcon } from '@chakra-ui/icons';
 function BackButton() {
   const navigate = useNavigate();
   const handleBack = () => {
-    navigate('/');
+    navigate(-1);
   };
 
   return (

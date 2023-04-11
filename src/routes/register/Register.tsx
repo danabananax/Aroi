@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Button, Flex } from '@chakra-ui/react';
+import { Box, Button, Flex } from '@chakra-ui/react';
 import { Link, Navigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { FirebaseError } from 'firebase/app';
 import RegisterForm from './RegisterForm';
 import { auth } from '../../firebase';
 import { signedInUserProp } from '../../types';
@@ -10,24 +11,22 @@ function Register({ signedInUser }: signedInUserProp) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loadingSubmit, setLoadingSubmit] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setLoadingSubmit(true);
     createUserWithEmailAndPassword(auth, email, password)
-      .then(() => { console.log('successfully registered: ', email); setLoadingSubmit(false); })
-      .catch((error) => {
-        // TODO: Implement actual error handling in login page with user feedback
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.error(errorCode, errorMessage);
+      .then(() => { setLoadingSubmit(false); })
+      .catch((error: FirebaseError) => {
+        setErrorMessage(error.code);
         setLoadingSubmit(false);
       });
   };
   if (signedInUser) return <Navigate to="/" />;
   return (
-    <Flex flexDirection="column" pt={28}>
-      <form onSubmit={handleSubmit}>
+    <Flex flexDirection="column" pt={28} alignItems="center" textAlign="center">
+      <form onSubmit={handleSubmit} onFocus={() => setErrorMessage('')}>
         <RegisterForm
           email={email}
           setEmail={setEmail}
@@ -39,6 +38,9 @@ function Register({ signedInUser }: signedInUserProp) {
         </Button>
       </form>
       <Link to="/login">Login</Link>
+      <Box mt={12}>
+        {errorMessage ?? ''}
+      </Box>
     </Flex>
   );
 }

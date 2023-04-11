@@ -15,7 +15,6 @@ function Home({ signedInUser, homedata }: HomeProps) {
     setLogoutLoading(true);
     signOut(auth)
       .then(() => {
-        console.log('successfully signed out');
         setLogoutLoading(false);
       })
       .catch((error) => { console.error(error); });
@@ -30,12 +29,14 @@ function Home({ signedInUser, homedata }: HomeProps) {
         isLoading={logoutLoading}
         onClick={handleLogout}
         m={2}
+        mb={6}
       >
         Logout
       </Button>
       <Button
         onClick={handleAddRecipe}
         m={2}
+        mb={6}
       >
         Add Recipe
       </Button>

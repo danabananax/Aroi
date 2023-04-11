@@ -27,17 +27,14 @@ function AddRecipeContainer({ signedInUser }: signedInUserProp) {
   const [newRecipe, setNewRecipe] = useState<recipe>(defaultRecipe);
   const location = useLocation();
 
+  // Works to inject an existing recipe via edit button
   useEffect(() => {
     const locationState = location.state as recipe;
-    console.log(locationState);
     if (locationState) {
-      console.log(`Recipe exists, so we set with: ${JSON.stringify(locationState)}`);
       setNewRecipe(locationState);
     }
   }, []);
 
-  // TODO: Update layout and UI corresponding to Figma design
-  // TODO: seperate add recipe business logic and UI code
   if (!signedInUser) return <Navigate to="/login" />;
   return (
     <Fade in>
