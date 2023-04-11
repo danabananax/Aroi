@@ -25,7 +25,7 @@ function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
   const getRecipes = async () => {
     setLoadingRecipes(true);
     try {
-      if (!userId) return;
+      if (!userId) throw Error('No user');
       const userRecipesCollectionRef = collection(db, 'users', userId, 'recipes');
       const userRecipesSnapshot = await getDocs(userRecipesCollectionRef);
       setUserRecipes(

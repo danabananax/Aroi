@@ -28,7 +28,6 @@ function SubmitRecipeButton({ newRecipe, userId }: submitRecipeButtonProps) {
   const handleSubmitRecipe = async () => {
     setSubmitLoading(true);
     const newRecipeCopy = newRecipe;
-    console.log(`Submitting ${JSON.stringify(newRecipeCopy)}`);
     const newRecipeDocRef = newRecipeCopy.id
       ? doc(db, 'users', userId, 'recipes', newRecipeCopy.id)
       : doc(collection(db, 'users', userId, 'recipes'));

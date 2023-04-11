@@ -24,7 +24,6 @@ function App() {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setLoadingAuth(true);
       if (user) {
-        console.log('Auth state changed');
         setSignedInUser(user);
       } else {
         setSignedInUser(null);

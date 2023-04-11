@@ -17,7 +17,6 @@ function Login({ signedInUser }: signedInUserProp) {
     setLoadingSubmit(true);
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
-        console.log('Login Success');
         setLoadingSubmit(false);
       })
       .catch((error) => {
