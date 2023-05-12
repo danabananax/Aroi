@@ -15,7 +15,6 @@ function AddMethod({ newRecipe, setNewRecipe }: setRecipeProps) {
 
   const handleAddStep = (event: React.SyntheticEvent) => {
     event.preventDefault();
-    console.log(newRecipe);
     setNewRecipe({
       ...newRecipe,
       method: [...newRecipe.method, currStep],

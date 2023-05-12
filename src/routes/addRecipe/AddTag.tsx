@@ -14,7 +14,6 @@ function AddTag({ newRecipe, setNewRecipe }: setRecipeProps) {
 
   const handleAddTag = (event: React.SyntheticEvent) => {
     event.preventDefault();
-    console.log(newRecipe);
     if (!newRecipe.tags.includes(tag)) {
       setNewRecipe({
         ...newRecipe,
