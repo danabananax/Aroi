@@ -9,11 +9,11 @@ function DeletableEntry({ identifier, textContent, deleteFunction }: DeletableEn
       direction="row"
       w="100%"
       justify="space-between"
-      align="center"
+      align="flex-start"
       key={`id${Math.random().toString(16).slice(2)}`}
-      mb={1.5}
+      mb={2}
     >
-      <Text lineHeight="short">
+      <Text lineHeight="short" wordBreak="break-all">
         {textContent}
       </Text>
       <IconButton
@@ -21,6 +21,7 @@ function DeletableEntry({ identifier, textContent, deleteFunction }: DeletableEn
         aria-label={`Delete ${identifier} entry from list`}
         icon={<DeleteIcon />}
         variant="ghost"
+        ml={8}
         onClick={(e) => { deleteFunction(e, identifier); }}
         opacity="30%"
         size="xs"

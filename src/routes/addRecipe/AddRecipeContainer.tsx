@@ -11,6 +11,7 @@ import AddMethod from './AddMethod';
 import AddMisc from './AddMisc';
 import AddName from './AddName';
 import RecipeTempView from './RecipeTempView';
+import AddTag from './AddTag';
 
 function AddRecipeContainer({ signedInUser }: signedInUserProp) {
   const defaultRecipe:recipe = {
@@ -20,7 +21,7 @@ function AddRecipeContainer({ signedInUser }: signedInUserProp) {
     method: [],
     name: '',
     servings: 0,
-    tags: [''],
+    tags: [],
     total_time: '',
   };
 
@@ -50,9 +51,10 @@ function AddRecipeContainer({ signedInUser }: signedInUserProp) {
         >
           <BackButton />
           <AddName newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
+          <AddMisc newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
+          <AddTag newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
           <AddIngredients newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
           <AddMethod newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
-          <AddMisc newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
           <SubmitRecipeButton userId={signedInUser.uid} newRecipe={newRecipe} />
         </Box>
         <Box>

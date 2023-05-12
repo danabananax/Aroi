@@ -23,7 +23,7 @@ function AddMisc({ newRecipe, setNewRecipe }: setRecipeProps) {
 
   return (
     <>
-      <Heading size="md" mt={3}>Add Misc</Heading>
+      <Heading size="md" mt={3}>Recipe Info</Heading>
       <Box py={2}>
         <Input
           mb={2}

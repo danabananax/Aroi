@@ -1,7 +1,8 @@
 import {
-  Box, Flex, Heading, Text,
+  Box, Flex, Heading, Tag, TagCloseButton, TagLabel, Text,
 } from '@chakra-ui/react';
 import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { setRecipeProps } from '../../types';
 import DeletableEntry from './DeletableEntry';
 
@@ -19,11 +20,17 @@ function RecipeTempView({ newRecipe, setNewRecipe }: setRecipeProps) {
     setNewRecipe({ ...newRecipe, method: newMethod });
   };
 
+  const handleRemoveTag = (event: React.SyntheticEvent, tagToRemove: string) => {
+    event.preventDefault();
+    const newTags = newRecipe.tags.filter((tag) => tag !== tagToRemove);
+    setNewRecipe({ ...newRecipe, tags: newTags });
+  };
+
   return (
     <Box maxW="500" ml={16}>
-      <Flex mb={6} justify="space-between">
+      <Flex mb={4} justify="space-between">
         <Heading>{newRecipe.name}</Heading>
-        <Box ml={4} mt={2} minW="100px" minH="50px">
+        <Box ml={4} mt={3} minW="100px" minH="50px">
           {newRecipe.servings > 0 && (
           <Text fontSize={11} size="sm" textAlign="right">
             Servings:
@@ -46,6 +53,28 @@ function RecipeTempView({ newRecipe, setNewRecipe }: setRecipeProps) {
           </Text>
           )}
         </Box>
+      </Flex>
+      <Flex
+        alignItems="flex-start"
+        justifyContent="flex-start"
+        textAlign="left"
+        wrap="wrap"
+        mb={4}
+      >
+        {newRecipe.tags.map((tag) => (
+          <Tag
+            size="sm"
+            key={uuidv4()}
+            borderRadius="full"
+            variant="subtle"
+            colorScheme="pink"
+            mb={2}
+            mr={2}
+          >
+            <TagLabel>{tag.charAt(0).toUpperCase() + tag.slice(1)}</TagLabel>
+            <TagCloseButton onClick={(e) => handleRemoveTag(e, tag)} />
+          </Tag>
+        ))}
       </Flex>
       {Object.keys(newRecipe.ingredients).map((ingredient) => (
         <DeletableEntry
