@@ -1,5 +1,9 @@
 import React, { useRef, useState } from 'react';
 import {
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
   Box, Button, Heading, Input,
 } from '@chakra-ui/react';
 import { setRecipeProps } from '../../types';
@@ -22,21 +26,26 @@ function AddTag({ newRecipe, setNewRecipe }: setRecipeProps) {
   };
 
   return (
-    <>
-      <Heading size="md" mt={3}>Add Tags</Heading>
-      <form onSubmit={handleAddTag}>
-        <Box py={2}>
-          <Input
-            onChange={(e) => setTag(e.target.value)}
-            placeholder="Tag name"
-            value={tag}
-            ref={tagInput}
-            size="md"
-          />
-        </Box>
-        <Button type="submit" display="none" />
-      </form>
-    </>
+    <AccordionItem border="none">
+      <AccordionButton justifyContent="space-between">
+        <Heading size="md">Add Tags</Heading>
+        <AccordionIcon />
+      </AccordionButton>
+      <AccordionPanel>
+        <form onSubmit={handleAddTag}>
+          <Box>
+            <Input
+              onChange={(e) => setTag(e.target.value)}
+              placeholder="Tag name"
+              value={tag}
+              ref={tagInput}
+              size="md"
+            />
+          </Box>
+          <Button type="submit" display="none" />
+        </form>
+      </AccordionPanel>
+    </AccordionItem>
   );
 }
 

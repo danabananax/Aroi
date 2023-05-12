@@ -1,5 +1,9 @@
 import React from 'react';
 import {
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
   Box,
   Heading, Input,
 } from '@chakra-ui/react';
@@ -22,32 +26,37 @@ function AddMisc({ newRecipe, setNewRecipe }: setRecipeProps) {
   };
 
   return (
-    <>
-      <Heading size="md" mt={3}>Recipe Info</Heading>
-      <Box py={2}>
-        <Input
-          mb={2}
-          onChange={handleServingsChange}
-          placeholder="Servings"
-          value={(newRecipe.servings) || ''}
-          size="md"
-        />
-        <Input
-          mb={2}
-          onChange={handleActiveTimeChange}
-          placeholder="Active time"
-          value={newRecipe.active_time}
-          size="md"
-        />
-        <Input
-          mb={2}
-          onChange={handleTotalTimeChange}
-          placeholder="Total time"
-          value={newRecipe.total_time}
-          size="md"
-        />
-      </Box>
-    </>
+    <AccordionItem border="none">
+      <AccordionButton justifyContent="space-between">
+        <Heading size="md">Recipe Info</Heading>
+        <AccordionIcon />
+      </AccordionButton>
+      <AccordionPanel>
+        <Box textAlign="left" width="100%">
+          <Input
+            mb={2}
+            onChange={handleServingsChange}
+            placeholder="Servings"
+            value={(newRecipe.servings) || ''}
+            size="md"
+          />
+          <Input
+            mb={2}
+            onChange={handleActiveTimeChange}
+            placeholder="Active time"
+            value={newRecipe.active_time}
+            size="md"
+          />
+          <Input
+            mb={2}
+            onChange={handleTotalTimeChange}
+            placeholder="Total time"
+            value={newRecipe.total_time}
+            size="md"
+          />
+        </Box>
+      </AccordionPanel>
+    </AccordionItem>
   );
 }
 

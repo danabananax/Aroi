@@ -1,4 +1,5 @@
 import {
+  Accordion,
   Box, Fade, Flex,
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
@@ -40,7 +41,7 @@ function AddRecipeContainer({ signedInUser, setSelectedRecipe }: addRecipeContai
   return (
     <Fade in>
       <Flex
-        width="70vw"
+        width="1000px"
         direction="row"
         align="flex-start"
         justify="space-between"
@@ -49,12 +50,16 @@ function AddRecipeContainer({ signedInUser, setSelectedRecipe }: addRecipeContai
           textAlign="left"
           width="300px"
         >
-          <BackButton />
-          <AddName newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
-          <AddMisc newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
-          <AddTag newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
-          <AddIngredients newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
-          <AddMethod newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
+          <Box ml={2} mb={6}>
+            <BackButton />
+          </Box>
+          <Accordion allowToggle width="100%" allowMultiple>
+            <AddName newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
+            <AddMisc newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
+            <AddTag newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
+            <AddIngredients newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
+            <AddMethod newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
+          </Accordion>
           {setSelectedRecipe !== undefined
           && (
           <SubmitRecipeButton
@@ -64,9 +69,7 @@ function AddRecipeContainer({ signedInUser, setSelectedRecipe }: addRecipeContai
           />
           )}
         </Box>
-        <Box>
-          <RecipeTempView newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
-        </Box>
+        <RecipeTempView newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
       </Flex>
     </Fade>
   );

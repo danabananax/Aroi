@@ -1,5 +1,9 @@
 import React, { useRef, useState } from 'react';
 import {
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
   Box,
   Button, Heading, Input,
 } from '@chakra-ui/react';
@@ -21,21 +25,26 @@ function AddMethod({ newRecipe, setNewRecipe }: setRecipeProps) {
   };
 
   return (
-    <>
-      <Heading size="md" mt={3}>Add Method</Heading>
-      <form onSubmit={handleAddStep}>
-        <Box py={2}>
-          <Input
-            onChange={(e) => setCurrStep(e.target.value)}
-            placeholder="Method step"
-            value={currStep}
-            ref={methodInput}
-            size="md"
-          />
-        </Box>
-        <Button type="submit" display="none" />
-      </form>
-    </>
+    <AccordionItem border="none">
+      <AccordionButton>
+        <Heading size="md">Add Method</Heading>
+        <AccordionIcon />
+      </AccordionButton>
+      <AccordionPanel>
+        <form onSubmit={handleAddStep}>
+          <Box>
+            <Input
+              onChange={(e) => setCurrStep(e.target.value)}
+              placeholder="Method step"
+              value={currStep}
+              ref={methodInput}
+              size="md"
+            />
+          </Box>
+          <Button type="submit" display="none" />
+        </form>
+      </AccordionPanel>
+    </AccordionItem>
   );
 }
 

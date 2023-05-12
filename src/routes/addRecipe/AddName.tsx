@@ -1,5 +1,7 @@
 import React from 'react';
-import { Box, Heading, Input } from '@chakra-ui/react';
+import {
+  AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Heading, Input,
+} from '@chakra-ui/react';
 import { setRecipeProps } from '../../types';
 
 function AddName({ newRecipe, setNewRecipe }: setRecipeProps) {
@@ -9,17 +11,22 @@ function AddName({ newRecipe, setNewRecipe }: setRecipeProps) {
   };
 
   return (
-    <>
-      <Heading size="md" mt={3}>Add name</Heading>
-      <Box py={2}>
-        <Input
-          onChange={handleNameChange}
-          placeholder="Recipe name"
-          value={newRecipe.name}
-          size="md"
-        />
-      </Box>
-    </>
+    <AccordionItem border="none">
+      <AccordionButton justifyContent="space-between">
+        <Heading size="md">Recipe Name</Heading>
+        <AccordionIcon />
+      </AccordionButton>
+      <AccordionPanel>
+        <Box textAlign="left" width="100%">
+          <Input
+            onChange={handleNameChange}
+            placeholder="Recipe name"
+            value={newRecipe.name}
+            size="md"
+          />
+        </Box>
+      </AccordionPanel>
+    </AccordionItem>
   );
 }
 

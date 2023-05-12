@@ -1,5 +1,9 @@
 import React, { useRef, useState } from 'react';
 import {
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
   Button,
   Flex,
   Heading,
@@ -35,31 +39,36 @@ function AddIngredients({ newRecipe, setNewRecipe }: setRecipeProps) {
   };
 
   return (
-    <>
-      <Heading size="md" mt={3}>Add Ingredients</Heading>
-      <form onSubmit={handleAddIngredient}>
-        <Flex direction="column" justify="space-evenly" py={2}>
-          <Input
-            placeholder="Ingredient"
-            onChange={(e) => setCurrIngredient(e.target.value)}
-            name="ingredients"
-            value={currIngredient}
-            ref={ingredientInput}
-            mb={2}
-            size="md"
-          />
-          <Input
-            placeholder="Quantity"
-            onChange={(e) => setCurrQuantity(e.target.value)}
-            name="quantity"
-            value={currQuantity}
-            mb={2}
-            size="md"
-          />
-        </Flex>
-        <Button type="submit" display="none" />
-      </form>
-    </>
+    <AccordionItem border="none">
+      <AccordionButton justifyContent="space-between">
+        <Heading size="md">Add Ingredients</Heading>
+        <AccordionIcon />
+      </AccordionButton>
+      <AccordionPanel>
+        <form onSubmit={handleAddIngredient}>
+          <Flex direction="column" justify="space-evenly" py={2}>
+            <Input
+              placeholder="Ingredient"
+              onChange={(e) => setCurrIngredient(e.target.value)}
+              name="ingredients"
+              value={currIngredient}
+              ref={ingredientInput}
+              mb={2}
+              size="md"
+            />
+            <Input
+              placeholder="Quantity"
+              onChange={(e) => setCurrQuantity(e.target.value)}
+              name="quantity"
+              value={currQuantity}
+              mb={2}
+              size="md"
+            />
+          </Flex>
+          <Button type="submit" display="none" />
+        </form>
+      </AccordionPanel>
+    </AccordionItem>
   );
 }
 
