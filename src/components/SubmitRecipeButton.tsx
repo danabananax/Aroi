@@ -10,9 +10,10 @@ import { db } from '../firebase';
 interface submitRecipeButtonProps {
     newRecipe: recipe
     userId: string
+    setSelectedRecipe: React.Dispatch<recipe>
 }
 
-function SubmitRecipeButton({ newRecipe, userId }: submitRecipeButtonProps) {
+function SubmitRecipeButton({ newRecipe, userId, setSelectedRecipe }: submitRecipeButtonProps) {
   const [submitLoading, setSubmitLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -37,7 +38,8 @@ function SubmitRecipeButton({ newRecipe, userId }: submitRecipeButtonProps) {
       console.log(e);
     } finally {
       setSubmitLoading(false);
-      navigate('/');
+      setSelectedRecipe(newRecipe);
+      navigate(-1);
     }
   };
 

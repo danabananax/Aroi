@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Box, Fade, Flex, Heading, Text,
+  Box, Fade, Flex, Heading, Tag, TagLabel, Text,
 } from '@chakra-ui/react';
 import { Navigate } from 'react-router-dom';
 import BackButton from '../../components/BackButton';
@@ -24,7 +24,27 @@ function ViewRecipeLayout({ signedInUser, selectedRecipe }: ViewRecipeProps) {
             userId={userId}
           />
         </Flex>
-        <Heading textAlign="left" size="2xl">{selectedRecipe.name}</Heading>
+        <Flex
+          justifyContent="space-between"
+          alignItems="flex-start"
+        >
+          <Heading textAlign="left" size="2xl">{selectedRecipe.name}</Heading>
+          <Box maxW="200px" textAlign="right" mt={2}>
+            {selectedRecipe.tags.map((tag) => (
+              <Tag
+                size="md"
+                key={tag}
+                borderRadius="full"
+                variant="subtle"
+                colorScheme="pink"
+                mb={2}
+                mr={2}
+              >
+                <TagLabel>{tag.charAt(0).toUpperCase() + tag.slice(1)}</TagLabel>
+              </Tag>
+            ))}
+          </Box>
+        </Flex>
         <Flex textAlign="left" direction="row" justifyContent="space-between" width="100%" py={8}>
           <Box width="35%">
             {Object.keys(selectedRecipe.ingredients).map((key) => (

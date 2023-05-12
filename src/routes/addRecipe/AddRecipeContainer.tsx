@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import BackButton from '../../components/BackButton';
 import SubmitRecipeButton from '../../components/SubmitRecipeButton';
-import { recipe, signedInUserProp } from '../../types';
+import { recipe, addRecipeContainerProps } from '../../types';
 import AddIngredients from './AddIngredients';
 import AddMethod from './AddMethod';
 import AddMisc from './AddMisc';
@@ -13,7 +13,7 @@ import AddName from './AddName';
 import RecipeTempView from './RecipeTempView';
 import AddTag from './AddTag';
 
-function AddRecipeContainer({ signedInUser }: signedInUserProp) {
+function AddRecipeContainer({ signedInUser, setSelectedRecipe }: addRecipeContainerProps) {
   const defaultRecipe:recipe = {
     active_time: '',
     group: [''],
@@ -55,7 +55,14 @@ function AddRecipeContainer({ signedInUser }: signedInUserProp) {
           <AddTag newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
           <AddIngredients newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
           <AddMethod newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
-          <SubmitRecipeButton userId={signedInUser.uid} newRecipe={newRecipe} />
+          {setSelectedRecipe !== undefined
+          && (
+          <SubmitRecipeButton
+            userId={signedInUser.uid}
+            newRecipe={newRecipe}
+            setSelectedRecipe={setSelectedRecipe}
+          />
+          )}
         </Box>
         <Box>
           <RecipeTempView newRecipe={newRecipe} setNewRecipe={setNewRecipe} />

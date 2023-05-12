@@ -27,6 +27,10 @@ export interface ViewRecipeProps {
 export interface signedInUserProp {
     signedInUser: Iuser
 }
+export interface addRecipeContainerProps {
+    signedInUser: Iuser
+    setSelectedRecipe: React.Dispatch<recipe>
+}
 
 export interface deleteRecipeProps {
   userId: string
