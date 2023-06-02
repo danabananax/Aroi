@@ -14,7 +14,7 @@ function ViewRecipeLayout({ signedInUser, selectedRecipe }: ViewRecipeProps) {
   // TODO: Implement desktop layout corresponding to design on Figma
   return userId && selectedRecipe ? (
     <Fade in>
-      <Box width="70vw">
+      <Box width="1000px">
         <Flex direction="row" justifyContent="space-between" width="100%" mb={8}>
           <BackButton />
           <EditRecipeButton recipe={selectedRecipe} />
