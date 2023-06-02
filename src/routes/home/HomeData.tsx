@@ -28,11 +28,11 @@ function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
       if (!userId) throw Error('No user');
       const userRecipesCollectionRef = collection(db, 'users', userId, 'recipes');
       const userRecipesSnapshot = await getDocs(userRecipesCollectionRef);
-      setUserRecipes(
-        userRecipesSnapshot.docs.map(
-          (recipeSnapshot) => ({ ...recipeSnapshot.data(), id: recipeSnapshot.id } as recipe),
-        ),
-      );
+      const updatedRecipesList = userRecipesSnapshot.docs.map((recipeSnapshot) => (
+        {...recipeSnapshot.data(), id: recipeSnapshot.id} as recipe
+      ));
+      console.log(updatedRecipesList);
+      setUserRecipes(updatedRecipesList);
     } catch (e) {
       console.log(e);
     }
@@ -51,10 +51,11 @@ function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
       </Box>
     );
   }
+
   return (
     <Fade in>
       <Box>
-        {userRecipes.length > 1
+        {userRecipes.length > 0
           ? userRecipes.map((recipe: recipe) => (
             <RecipeLink
               recipe={recipe}
