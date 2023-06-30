@@ -31,7 +31,6 @@ function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
       const updatedRecipesList = userRecipesSnapshot.docs.map((recipeSnapshot) => (
         {...recipeSnapshot.data(), id: recipeSnapshot.id} as recipe
       ));
-      console.log(updatedRecipesList);
       setUserRecipes(updatedRecipesList);
     } catch (e) {
       console.log(e);

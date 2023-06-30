@@ -41,7 +41,7 @@ function AddRecipeContainer({ signedInUser, setSelectedRecipe }: addRecipeContai
   return (
     <Fade in>
       <Flex
-        width="1000px"
+        minW="900px"
         direction="row"
         align="flex-start"
         justify="space-between"

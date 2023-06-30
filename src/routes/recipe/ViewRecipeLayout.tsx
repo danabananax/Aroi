@@ -11,10 +11,9 @@ import DeleteRecipeButton from '../components/DeleteRecipeButton';
 function ViewRecipeLayout({ signedInUser, selectedRecipe }: ViewRecipeProps) {
   const userId = signedInUser?.uid;
 
-  // TODO: Implement desktop layout corresponding to design on Figma
   return userId && selectedRecipe ? (
     <Fade in>
-      <Box width="1000px">
+      <Box minW={["390px", "900px"]}>
         <Flex direction="row" justifyContent="space-between" width="100%" mb={8}>
           <BackButton />
           <EditRecipeButton recipe={selectedRecipe} />

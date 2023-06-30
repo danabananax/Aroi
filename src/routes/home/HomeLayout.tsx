@@ -1,5 +1,5 @@
 import {
-  Button, Box,
+  Button, Box, Flex,
 } from '@chakra-ui/react';
 import { signOut } from 'firebase/auth';
 import React, { useState } from 'react';
@@ -25,21 +25,23 @@ function Home({ signedInUser, homedata }: HomeProps) {
   if (!signedInUser) return <Navigate to="/login" />;
   return (
     <Box textAlign="center">
-      <Button
-        isLoading={logoutLoading}
-        onClick={handleLogout}
-        m={2}
-        mb={6}
-      >
-        Logout
-      </Button>
-      <Button
-        onClick={handleAddRecipe}
-        m={2}
-        mb={6}
-      >
-        Add Recipe
-      </Button>
+      <Flex mb={6} justify="center">
+        <Button
+          isLoading={logoutLoading}
+          onClick={handleLogout}
+          m={2}
+        >
+          Logout
+        </Button>
+        <Button
+          onClick={handleAddRecipe}
+          m={2}
+        >
+          Add Recipe
+        </Button>
+      </Flex>
+
+      
       { homedata }
     </Box>
   );
