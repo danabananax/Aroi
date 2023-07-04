@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button } from '@chakra-ui/react';
+import { Button, useToast } from '@chakra-ui/react';
 import {
   collection, doc, setDoc,
 } from 'firebase/firestore';
@@ -16,6 +16,7 @@ interface submitRecipeButtonProps {
 function SubmitRecipeButton({ newRecipe, userId, setSelectedRecipe }: submitRecipeButtonProps) {
   const [submitLoading, setSubmitLoading] = useState(false);
   const navigate = useNavigate();
+  const toast = useToast();
 
   const {
     name, method, ingredients, servings,
@@ -26,22 +27,34 @@ function SubmitRecipeButton({ newRecipe, userId, setSelectedRecipe }: submitReci
     && Object.keys(ingredients).length
     && servings);
 
-  const handleSubmitRecipe = async () => {
+  const handleSubmitRecipe = () => {
     setSubmitLoading(true);
     const newRecipeCopy = newRecipe;
+
+    // edit vs add new doc
     const newRecipeDocRef = newRecipeCopy.id
-      ? doc(db, 'users', userId, 'recipes', newRecipeCopy.id)
+      ? doc(db, 'users', userId, 'recipes', newRecipeCopy?.id)
       : doc(collection(db, 'users', userId, 'recipes'));
-    try {
-      await setDoc(newRecipeDocRef, newRecipeCopy);
-    } catch (e) {
-      console.log(e);
-    } finally {
+
+    setDoc(newRecipeDocRef, newRecipeCopy)
+      .then(() => {
+        toast({
+          title: "Recipe successfully uploaded",
+          status: 'success',
+          duration: 2000,
+        })
       setSubmitLoading(false);
       setSelectedRecipe(newRecipe);
       navigate(-1);
-    }
-  };
+      })
+      .catch((e) => {
+        toast({
+          title: e.name,
+          status: 'error',
+          duration: 4000,
+        })
+      })
+  }
 
   return (
     <Button

@@ -10,6 +10,7 @@ import {
   ModalHeader,
   ModalOverlay,
   useDisclosure,
+  useToast,
 } from '@chakra-ui/react';
 import {
   deleteDoc, doc,
@@ -23,12 +24,20 @@ function DeleteRecipeButton({ keyToDelete, recipeName, userId }: deleteRecipePro
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [loadingDelete, setLoadingDelete] = useState(false);
   const navigate = useNavigate();
+  const toast = useToast();
 
   const handleDeleteRecipe = () => {
     setLoadingDelete(true);
     if (keyToDelete) {
       const recipesToDeleteRef = doc(db, 'users', userId, 'recipes', keyToDelete);
       deleteDoc(recipesToDeleteRef)
+        .then(() => {
+          toast({
+            title: "Deleted recipe",
+            status: "success",
+            duration: 2000,
+          })
+        })
         .then(() => { navigate('/'); })
         .catch((e) => console.log(e))
         .finally(() => setLoadingDelete(false));
@@ -47,7 +56,7 @@ function DeleteRecipeButton({ keyToDelete, recipeName, userId }: deleteRecipePro
             {`Are you sure you want to delete this ${recipeName} recipe?`}
           </ModalBody>
           <ModalFooter>
-            <Button isLoading={loadingDelete} colorScheme="blue" mr={3} onClick={handleDeleteRecipe}>
+            <Button isLoading={loadingDelete} colorScheme="red" mr={3} onClick={handleDeleteRecipe}>
               Delete
             </Button>
             <Button variant="ghost" onClick={onClose}>Cancel</Button>

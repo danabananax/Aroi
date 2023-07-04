@@ -13,7 +13,7 @@ function ViewRecipeLayout({ signedInUser, selectedRecipe }: ViewRecipeProps) {
 
   return userId && selectedRecipe ? (
     <Fade in>
-      <Box minW={["390px", "900px"]}>
+      <Box minW={["390px", "900px"]} px={[6, 0]}>
         <Flex direction="row" justifyContent="space-between" width="100%" mb={8}>
           <BackButton />
           <EditRecipeButton recipe={selectedRecipe} />
@@ -44,8 +44,8 @@ function ViewRecipeLayout({ signedInUser, selectedRecipe }: ViewRecipeProps) {
             ))}
           </Box>
         </Flex>
-        <Flex textAlign="left" direction="row" justifyContent="space-between" width="100%" py={8}>
-          <Box width="35%">
+        <Flex textAlign="left" direction={["column", "row"]} justifyContent="space-between" width="100%" py={8}>
+          <Box width={["100%", "35%"]} pb={[8, 0]}>
             {Object.keys(selectedRecipe.ingredients).map((key) => (
               <Flex
                 justify="space-between"
@@ -58,7 +58,7 @@ function ViewRecipeLayout({ signedInUser, selectedRecipe }: ViewRecipeProps) {
               </Flex>
             ))}
           </Box>
-          <Box maxWidth="50%">
+          <Box maxWidth={["100%", "50%"]}>
             {selectedRecipe.method.map((method, idx) => (
               <Text fontSize={16} mb={2} key={`id${Math.random().toString(16).slice(2)}`}>
                 {`${idx + 1}. ${method}`}
