@@ -25,7 +25,7 @@ function AddMethod({ newRecipe, setNewRecipe }: setRecipeProps) {
 
   return (
     <AccordionItem border="none">
-      <AccordionButton>
+      <AccordionButton justifyContent="space-between">
         <Heading size="md">Add Method</Heading>
         <AccordionIcon />
       </AccordionButton>

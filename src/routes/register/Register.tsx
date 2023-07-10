@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Button, Flex } from '@chakra-ui/react';
+import { Box, Button, Flex, useToast } from '@chakra-ui/react';
 import { Link, Navigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { FirebaseError } from 'firebase/app';
@@ -12,11 +12,17 @@ function Register({ signedInUser }: signedInUserProp) {
   const [password, setPassword] = useState('');
   const [loadingSubmit, setLoadingSubmit] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const toast = useToast();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setLoadingSubmit(true);
     createUserWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        toast({
+          title: "Successfully registered"
+        })
+      })
       .then(() => { setLoadingSubmit(false); })
       .catch((error: FirebaseError) => {
         setErrorMessage(error.code);
