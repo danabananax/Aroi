@@ -38,6 +38,7 @@ function AddIngredients({ newRecipe, setNewRecipe }: setRecipeProps) {
         title: `${currIngredient} added to ingredients`,
         status: "info",
         duration: 1500,
+        position: "top",
       })
       setCurrIngredient('');
       setCurrQuantity('');

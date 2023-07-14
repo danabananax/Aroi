@@ -43,18 +43,18 @@ function AddRecipeContainer({ signedInUser, setSelectedRecipe }: addRecipeContai
       <Flex
         minW={["390px", "900px"]}
         direction={["column", "row"]}
-        align="flex-start"
+        align={["flex-start"]}
         justify={"space-between"}
       >
         <Box
-          textAlign={["left"]}
+          textAlign={"left"}
           mb={[8, 0]}
           flex={1}
         >
           <Box ml={2} mb={6}>
             <BackButton />
           </Box>
-          <Accordion allowToggle allowMultiple>
+          <Accordion allowToggle allowMultiple w="300px">
             <AddName newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
             <AddMisc newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
             <AddTag newRecipe={newRecipe} setNewRecipe={setNewRecipe} />

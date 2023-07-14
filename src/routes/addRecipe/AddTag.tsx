@@ -4,13 +4,14 @@ import {
   AccordionIcon,
   AccordionItem,
   AccordionPanel,
-  Box, Button, Heading, Input,
+  Box, Button, Heading, Input, useToast,
 } from '@chakra-ui/react';
 import { setRecipeProps } from '../../types';
 
 function AddTag({ newRecipe, setNewRecipe }: setRecipeProps) {
   const [tag, setTag] = useState<string>('');
   const tagInput = useRef<HTMLInputElement>(null);
+  const toast = useToast();
 
   const handleAddTag = (event: React.SyntheticEvent) => {
     event.preventDefault();
@@ -20,6 +21,12 @@ function AddTag({ newRecipe, setNewRecipe }: setRecipeProps) {
         tags: [...newRecipe.tags, tag],
       });
     }
+    toast({
+      title: `${tag} added to tags`,
+      status: "info",
+      duration: 1500,
+      position: "top",
+    })
     setTag('');
     tagInput.current?.focus();
   };

@@ -21,9 +21,10 @@ function AddMethod({ newRecipe, setNewRecipe }: setRecipeProps) {
       method: [...newRecipe.method, currStep],
     });
     toast({
-      title: `'Step ${newRecipe.method.length}: ${currStep.slice(0, 8)}...' added to method`,
+      title: `'Step ${newRecipe.method.length}: ${currStep.slice(0, 5)}..' added to method`,
       status: "info",
       duration: 1500,
+      position: "top",
     })
     setCurrStep('');
     methodInput.current?.focus();
