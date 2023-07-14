@@ -5,13 +5,14 @@ import {
   AccordionItem,
   AccordionPanel,
   Box,
-  Button, Heading, Input,
+  Button, Heading, Input, useToast,
 } from '@chakra-ui/react';
 import { setRecipeProps } from '../../types';
 
 function AddMethod({ newRecipe, setNewRecipe }: setRecipeProps) {
   const [currStep, setCurrStep] = useState<string>('');
   const methodInput = useRef<HTMLInputElement>(null);
+  const toast = useToast();
 
   const handleAddStep = (event: React.SyntheticEvent) => {
     event.preventDefault();
@@ -19,6 +20,11 @@ function AddMethod({ newRecipe, setNewRecipe }: setRecipeProps) {
       ...newRecipe,
       method: [...newRecipe.method, currStep],
     });
+    toast({
+      title: `'Step ${newRecipe.method.length}: ${currStep.slice(0, 8)}...' added to method`,
+      status: "info",
+      duration: 1500,
+    })
     setCurrStep('');
     methodInput.current?.focus();
   };

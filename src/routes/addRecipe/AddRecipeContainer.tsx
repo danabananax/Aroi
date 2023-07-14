@@ -42,13 +42,14 @@ function AddRecipeContainer({ signedInUser, setSelectedRecipe }: addRecipeContai
     <Fade in>
       <Flex
         minW={["390px", "900px"]}
-        direction="row"
+        direction={["column", "row"]}
         align="flex-start"
-        justify="space-between"
+        justify={"space-between"}
       >
         <Box
-          textAlign="left"
-          width="300px"
+          textAlign={["left", "center"]}
+          width="100%"
+          mb={[8, 0]}
         >
           <Box ml={2} mb={6}>
             <BackButton />

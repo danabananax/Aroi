@@ -8,6 +8,7 @@ import {
   Flex,
   Heading,
   Input,
+  useToast,
 } from '@chakra-ui/react';
 import { setRecipeProps } from '../../types';
 
@@ -15,6 +16,7 @@ function AddIngredients({ newRecipe, setNewRecipe }: setRecipeProps) {
   const [currIngredient, setCurrIngredient] = useState<string>('');
   const ingredientInput = useRef<HTMLInputElement>(null);
   const [currQuantity, setCurrQuantity] = useState<string>('');
+  const toast = useToast();
 
   const handleInvalidInput = () => {
     console.log('Ingredient name field must be populated');
@@ -32,6 +34,11 @@ function AddIngredients({ newRecipe, setNewRecipe }: setRecipeProps) {
           [currIngredient]: currQuantity || '',
         },
       });
+      toast({
+        title: `${currIngredient} added to ingredients`,
+        status: "info",
+        duration: 1500,
+      })
       setCurrIngredient('');
       setCurrQuantity('');
     }
