@@ -72,7 +72,9 @@ function AddIngredients({ newRecipe, setNewRecipe }: setRecipeProps) {
               size="md"
             />
           </Flex>
-          <Button type="submit" display="none" />
+          <Button type="submit" size={"sm"}>
+            Add Ingredient
+          </Button>
         </form>
       </AccordionPanel>
     </AccordionItem>

@@ -47,14 +47,14 @@ function AddRecipeContainer({ signedInUser, setSelectedRecipe }: addRecipeContai
         justify={"space-between"}
       >
         <Box
-          textAlign={["left", "center"]}
-          width="100%"
+          textAlign={["left"]}
           mb={[8, 0]}
+          flex={1}
         >
           <Box ml={2} mb={6}>
             <BackButton />
           </Box>
-          <Accordion allowToggle width="100%" allowMultiple>
+          <Accordion allowToggle allowMultiple>
             <AddName newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
             <AddMisc newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
             <AddTag newRecipe={newRecipe} setNewRecipe={setNewRecipe} />

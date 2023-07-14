@@ -5,6 +5,7 @@ import {
   AccordionItem,
   AccordionPanel,
   Box,
+  Flex,
   Heading, Input,
 } from '@chakra-ui/react';
 import { setRecipeProps } from '../../types';
@@ -32,7 +33,7 @@ function AddMisc({ newRecipe, setNewRecipe }: setRecipeProps) {
         <AccordionIcon />
       </AccordionButton>
       <AccordionPanel>
-        <Box textAlign="left" width="100%">
+        <Flex direction={"column"} justify="space-evenly" py={2}>
           <Input
             mb={2}
             onChange={handleServingsChange}
@@ -54,7 +55,7 @@ function AddMisc({ newRecipe, setNewRecipe }: setRecipeProps) {
             value={newRecipe.total_time}
             size="md"
           />
-        </Box>
+        </Flex>
       </AccordionPanel>
     </AccordionItem>
   );

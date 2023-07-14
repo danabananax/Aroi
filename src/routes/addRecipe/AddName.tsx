@@ -17,7 +17,7 @@ function AddName({ newRecipe, setNewRecipe }: setRecipeProps) {
         <AccordionIcon />
       </AccordionButton>
       <AccordionPanel>
-        <Box textAlign="left" width="100%">
+        <Box textAlign="left" width="100%" py={2}>
           <Input
             onChange={handleNameChange}
             placeholder="Recipe name"

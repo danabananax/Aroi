@@ -37,16 +37,19 @@ function AddMethod({ newRecipe, setNewRecipe }: setRecipeProps) {
       </AccordionButton>
       <AccordionPanel>
         <form onSubmit={handleAddStep}>
-          <Box>
+          <Box textAlign={"left"} py={2}>
             <Input
               onChange={(e) => setCurrStep(e.target.value)}
               placeholder="Method step"
               value={currStep}
               ref={methodInput}
               size="md"
+              mb={2}
             />
           </Box>
-          <Button type="submit" display="none" />
+          <Button type="submit" size={"sm"}>
+            Add Method
+          </Button>
         </form>
       </AccordionPanel>
     </AccordionItem>

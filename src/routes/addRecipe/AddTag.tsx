@@ -32,16 +32,19 @@ function AddTag({ newRecipe, setNewRecipe }: setRecipeProps) {
       </AccordionButton>
       <AccordionPanel>
         <form onSubmit={handleAddTag}>
-          <Box>
+          <Box py={2}>
             <Input
               onChange={(e) => setTag(e.target.value)}
               placeholder="Tag name"
               value={tag}
               ref={tagInput}
               size="md"
+              mb={2}
             />
           </Box>
-          <Button type="submit" display="none" />
+          <Button type="submit" size={"sm"}>
+            Add Tag
+          </Button>
         </form>
       </AccordionPanel>
     </AccordionItem>

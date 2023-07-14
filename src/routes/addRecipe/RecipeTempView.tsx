@@ -28,7 +28,7 @@ function RecipeTempView({ newRecipe, setNewRecipe }: setRecipeProps) {
 
   return (
     <Box maxW="500" ml={[0, 16]} p={[4, 0]}>
-      <Flex mb={4} justify={["space-between"]} textAlign={["left", "inherit"]}>
+      <Flex mb={4} justify={["space-between"]} textAlign={["left"]}>
         <Heading >{newRecipe.name}</Heading>
         <Box ml={4} mt={[0, 3]} minW="100px" minH="50px">
           {newRecipe.servings > 0 && (
