@@ -1,6 +1,6 @@
 import {
   Accordion,
-  Box, Fade, Flex,
+  Box, Center, Fade, Flex,
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
@@ -54,7 +54,7 @@ function AddRecipeContainer({ signedInUser, setSelectedRecipe }: addRecipeContai
           <Box ml={2} mb={6}>
             <BackButton />
           </Box>
-          <Accordion allowToggle allowMultiple w="300px">
+          <Accordion allowToggle allowMultiple w={["390px", "300px"]}>
             <AddName newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
             <AddMisc newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
             <AddTag newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
