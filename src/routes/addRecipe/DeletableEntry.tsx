@@ -12,6 +12,7 @@ function DeletableEntry({ identifier, textContent, deleteFunction }: DeletableEn
       align="flex-start"
       key={`id${Math.random().toString(16).slice(2)}`}
       mb={2}
+      px={[4, 0]}
       textAlign={["left"]}
     >
       <Text lineHeight="short" wordBreak="break-all">

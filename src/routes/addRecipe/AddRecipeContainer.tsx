@@ -41,7 +41,6 @@ function AddRecipeContainer({ signedInUser, setSelectedRecipe }: addRecipeContai
   return (
     <Fade in>
       <Flex
-        p={0}
         direction={["column", "row"]}
         align={["flex-start"]}
         justify={"space-between"}

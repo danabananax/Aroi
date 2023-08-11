@@ -1,5 +1,5 @@
 import {
-  Box, Flex, Heading, Tag, TagCloseButton, TagLabel, Text,
+  Box, Center, Flex, Heading, Tag, TagCloseButton, TagLabel, Text,
 } from '@chakra-ui/react';
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
@@ -27,8 +27,8 @@ function RecipeTempView({ newRecipe, setNewRecipe }: setRecipeProps) {
   };
 
   return (
-    <Box maxW="500" ml={[0, 16]} p={[4, 0]}>
-      <Flex mb={4} justify={["space-between"]} textAlign={["left"]}>
+    <Flex direction={"column"} minW={300} maxW="500px" align={"flex-start"} textAlign="left" ml={[0, 16]}>
+      <Flex mb={4} p={[4, 0]} justify={["space-between"]} width="100%">
         <Heading >{newRecipe.name}</Heading>
         <Box ml={4} mt={[0, 3]} minW="100px" minH="50px">
           {newRecipe.servings > 0 && (
@@ -55,10 +55,10 @@ function RecipeTempView({ newRecipe, setNewRecipe }: setRecipeProps) {
         </Box>
       </Flex>
       <Flex
-        alignItems="flex-start"
-        justifyContent="flex-start"
-        textAlign="left"
+        textAlign="right"
         wrap="wrap"
+
+        px={[4, 0]}
         mb={4}
       >
         {newRecipe.tags.map((tag) => (
@@ -91,7 +91,7 @@ function RecipeTempView({ newRecipe, setNewRecipe }: setRecipeProps) {
           deleteFunction={handleRemoveStep}
         />
       ))}
-    </Box>
+    </Flex>
   );
 }
 
