@@ -4,17 +4,17 @@ import {
 } from '@chakra-ui/react';
 import { setRecipeProps } from '../../types';
 
-function AddTag({ newRecipe, setNewRecipe }: setRecipeProps) {
+function AddTag({ curRecipe, setCurRecipe }: setRecipeProps) {
   const [tag, setTag] = useState<string>('');
   const tagInput = useRef<HTMLInputElement>(null);
   const toast = useToast();
 
   const handleAddTag = (event: React.SyntheticEvent) => {
     event.preventDefault();
-    if (!newRecipe.tags.includes(tag)) {
-      setNewRecipe({
-        ...newRecipe,
-        tags: [...newRecipe.tags, tag],
+    if (!curRecipe.tags.includes(tag)) {
+      setCurRecipe({
+        ...curRecipe,
+        tags: [...curRecipe.tags, tag],
       });
     }
     toast({

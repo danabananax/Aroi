@@ -39,10 +39,10 @@ function AddRecipeContainer({ signedInUser, setSelectedRecipe }: addRecipeContai
         </Box>
         <Center>
           <Flex direction={"column"} textAlign={"left"}>
-            <AddName newRecipe={curRecipe} setNewRecipe={setCurRecipe} />
-            <AddTag newRecipe={curRecipe} setNewRecipe={setCurRecipe}/>
-            <TagDisplay newRecipe={curRecipe} setNewRecipe={setCurRecipe} />
-            <RecipeEditor curRecipe={curRecipe} setRecipe={setCurRecipe}/>
+            <AddName curRecipe={curRecipe} setCurRecipe={setCurRecipe} />
+            <AddTag curRecipe={curRecipe} setCurRecipe={setCurRecipe}/>
+            <TagDisplay curRecipe={curRecipe} setCurRecipe={setCurRecipe} />
+            <RecipeEditor curRecipe={curRecipe} setCurRecipe={setCurRecipe}/>
           </Flex>
         </Center>
         {setSelectedRecipe !== undefined

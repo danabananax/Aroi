@@ -12,11 +12,6 @@ export interface recipe {
     instructions: string
 }
 
-export interface recipeEditorProps {
-  setRecipe: React.Dispatch<SetStateAction<recipe>>
-  curRecipe: recipe
-}
-
 export interface recipeEntry {
   [key: string]: recipe
 }
@@ -46,8 +41,8 @@ export interface RecipeLinkProps {
 }
 
 export interface setRecipeProps {
-  newRecipe: recipe
-  setNewRecipe: React.Dispatch<SetStateAction<recipe>>
+  curRecipe: recipe
+  setCurRecipe: React.Dispatch<SetStateAction<recipe>>
 }
 
 export interface HomeProps {

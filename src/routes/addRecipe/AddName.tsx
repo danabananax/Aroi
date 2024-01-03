@@ -1,13 +1,13 @@
 import React from 'react';
 import {
-  AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Heading, Input,
+  Box, Input,
 } from '@chakra-ui/react';
 import { setRecipeProps } from '../../types';
 
-function AddName({ newRecipe, setNewRecipe }: setRecipeProps) {
+function AddName({ curRecipe, setCurRecipe }: setRecipeProps) {
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    setNewRecipe({ ...newRecipe, name: value });
+    setCurRecipe({ ...curRecipe, name: value });
   };
 
   return (
@@ -15,7 +15,7 @@ function AddName({ newRecipe, setNewRecipe }: setRecipeProps) {
       <Input
         onChange={handleNameChange}
         placeholder="Recipe name"
-        value={newRecipe.name}
+        value={curRecipe.name}
         size="md"
       />
     </Box>

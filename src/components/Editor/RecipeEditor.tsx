@@ -6,7 +6,7 @@ import TextStyle from '@tiptap/extension-text-style';
 import StarterKit from '@tiptap/starter-kit';
 import { Box, Button } from '@chakra-ui/react';
 import React from 'react';
-import { recipeEditorProps } from '../../types';
+import { setRecipeProps } from '../../types';
 
 const extensions = [
   Color.configure({ types: [TextStyle.name, ListItem.name] }),
@@ -24,7 +24,7 @@ const extensions = [
 ]
 
 
-function RecipeEditor({ curRecipe, setRecipe }: recipeEditorProps) {
+function RecipeEditor({ curRecipe, setCurRecipe }: setRecipeProps) {
 
   console.log(curRecipe);
   const content = curRecipe.instructions;
@@ -32,7 +32,7 @@ function RecipeEditor({ curRecipe, setRecipe }: recipeEditorProps) {
     content,
     extensions,
     onUpdate: () => {
-      if(editor) setRecipe({...curRecipe, instructions: editor?.getHTML()})
+      if(editor) setCurRecipe({...curRecipe, instructions: editor?.getHTML()})
     },
     editorProps: {
       attributes: {

@@ -3,16 +3,16 @@ import React from "react";
 import { v4 as uuidv4 } from 'uuid';
 import { ViewRecipeProps, setRecipeProps } from "../../types";
 
-function TagDisplay({ newRecipe, setNewRecipe }: setRecipeProps) {
+function TagDisplay({ curRecipe, setCurRecipe }: setRecipeProps) {
     const handleRemoveTag = (event: React.SyntheticEvent, tagToRemove: string) => {
         event.preventDefault();
-        const newTags = newRecipe.tags.filter((tag) => tag !== tagToRemove);
-        setNewRecipe({ ...newRecipe, tags: newTags });
+        const newTags = curRecipe.tags.filter((tag) => tag !== tagToRemove);
+        setCurRecipe({ ...curRecipe, tags: newTags });
     };
 
     return (
         <Box textAlign={"left"}>
-            {newRecipe.tags.map((tag) => (
+            {curRecipe.tags.map((tag) => (
                 <Tag
                     size="sm"
                     key={uuidv4()}
