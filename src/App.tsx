@@ -6,7 +6,6 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { auth } from './firebase';
 import './App.css';
-// import ProtectedRoute from './routes/ProtectedRoute';
 import Register from './routes/register/Register';
 import Login from './routes/login/Login';
 import HomeLayout from './routes/home/HomeLayout';

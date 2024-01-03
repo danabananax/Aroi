@@ -7,69 +7,60 @@ import { Navigate, useLocation } from 'react-router-dom';
 import BackButton from '../../components/BackButton';
 import SubmitRecipeButton from '../../components/SubmitRecipeButton';
 import { recipe, addRecipeContainerProps } from '../../types';
-import AddIngredients from './AddIngredients';
-import AddMethod from './AddMethod';
-import AddMisc from './AddMisc';
 import AddName from './AddName';
-import RecipeTempView from './RecipeTempView';
+import RecipeEditor from '../../components/Editor/RecipeEditor';
 import AddTag from './AddTag';
+import TagDisplay from './TagDisplay';
 
 function AddRecipeContainer({ signedInUser, setSelectedRecipe }: addRecipeContainerProps) {
   const defaultRecipe:recipe = {
-    active_time: '',
-    group: [''],
-    ingredients: { },
-    method: [],
     name: '',
     servings: 0,
     tags: [],
     total_time: '',
+    instructions: "<p>default recipe start</p>",
   };
 
-  const [newRecipe, setNewRecipe] = useState<recipe>(defaultRecipe);
-  const location = useLocation();
+  const [curRecipe, setCurRecipe] = useState<recipe>(defaultRecipe);
 
-  // Works to inject an existing recipe via edit button
+  // Grabbing recipe from location from edit button with useNavigate
+  const location = useLocation();
   useEffect(() => {
-    const locationState = location.state as recipe;
-    if (locationState) {
-      setNewRecipe(locationState);
+    const recipe = location.state as recipe;
+    if (recipe) {
+      setCurRecipe(recipe);
     }
   }, []);
 
   if (!signedInUser) return <Navigate to="/login" />;
   return (
     <Fade in>
-      <Flex
-        direction={["column", "row"]}
-        //align={["flex-start"]}
-        justify={"space-between"}
-      >
+      <Flex direction={["column"]}>
         <Box
           textAlign={"left"}
           mb={[8, 0]}
           flex={1}
         >
-          <Box ml={2} mb={6}>
+          <Box mb={6}>
             <BackButton />
           </Box>
-          <Accordion allowToggle allowMultiple w={["390px", "300px"]}>
-            <AddName newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
-            <AddMisc newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
-            <AddTag newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
-            <AddIngredients newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
-            <AddMethod newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
-          </Accordion>
-          {setSelectedRecipe !== undefined
-          && (
-          <SubmitRecipeButton
-            userId={signedInUser.uid}
-            newRecipe={newRecipe}
-            setSelectedRecipe={setSelectedRecipe}
-          />
-          )}
         </Box>
-        <RecipeTempView newRecipe={newRecipe} setNewRecipe={setNewRecipe} />
+        <Center>
+          <Flex direction={"column"} textAlign={"left"}>
+            <AddName newRecipe={curRecipe} setNewRecipe={setCurRecipe} />
+            <AddTag newRecipe={curRecipe} setNewRecipe={setCurRecipe}/>
+            <TagDisplay newRecipe={curRecipe} setNewRecipe={setCurRecipe} />
+            <RecipeEditor editorContent={curRecipe.instructions} curRecipe={curRecipe} setRecipe={setCurRecipe}/>
+          </Flex>
+        </Center>
+        {setSelectedRecipe !== undefined
+        && (
+        <SubmitRecipeButton
+          userId={signedInUser.uid}
+          newRecipe={curRecipe}
+          setSelectedRecipe={setSelectedRecipe}
+        />
+        )}
       </Flex>
     </Fade>
   );

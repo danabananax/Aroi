@@ -13,7 +13,51 @@ const theme = extendTheme({
         outline: 'none',
         boxShadow: 'none',
       },
+      h1: {
+        fontSize: '3xl',
+        fontWeight: 'bold',
+      },
+      h2: {
+        fontSize: '2xl',
+        fontWeight: 'bold',
+      },
+      h3: {
+        fontSize: 'lg'
+      },
+      h4: {
+        fontSize: 'md'
+      },
+      h5: {
+        fontSize: 'sm'
+      },
+      h6: {
+        fontSize: 'xs',
+      }
     },
+    body: {
+      bg: 'gray.50',
+      color: 'gray.900',
+    },
+    h1: {
+      fontSize: '3xl',
+      fontWeight: 'bold',
+    },
+    h2: {
+      fontSize: '2xl',
+      fontWeight: 'bold',
+    },
+    h3: {
+      fontSize: 'lg'
+    },
+    h4: {
+      fontSize: 'md'
+    },
+    h5: {
+      fontSize: 'sm'
+    },
+    h6: {
+      fontSize: 'xs',
+    }
   },
 });
 

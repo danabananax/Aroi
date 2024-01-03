@@ -7,9 +7,14 @@ import BackButton from '../../components/BackButton';
 import { ViewRecipeProps } from '../../types';
 import EditRecipeButton from '../components/EditRecipeButton';
 import DeleteRecipeButton from '../components/DeleteRecipeButton';
+import parse from 'html-react-parser';
+
+import '../../components/Editor/styles.scss';
 
 function ViewRecipeLayout({ signedInUser, selectedRecipe }: ViewRecipeProps) {
   const userId = signedInUser?.uid;
+
+  console.log(selectedRecipe?.instructions);
 
   return userId && selectedRecipe ? (
     <Fade in>
@@ -44,27 +49,8 @@ function ViewRecipeLayout({ signedInUser, selectedRecipe }: ViewRecipeProps) {
             ))}
           </Box>
         </Flex>
-        <Flex textAlign="left" direction={["column", "row"]} justifyContent="space-between" width="100%" py={8}>
-          <Box width={["100%", "35%"]} pb={[8, 0]}>
-            {Object.keys(selectedRecipe.ingredients).map((key) => (
-              <Flex
-                justify="space-between"
-                w="100%"
-                key={`id${Math.random().toString(16).slice(2)}`}
-                mb={2}
-              >
-                <Text fontSize={20}>{key}</Text>
-                <Text fontSize={20}>{selectedRecipe.ingredients[key]}</Text>
-              </Flex>
-            ))}
-          </Box>
-          <Box maxWidth={["100%", "50%"]}>
-            {selectedRecipe.method.map((method, idx) => (
-              <Text fontSize={16} mb={2} key={`id${Math.random().toString(16).slice(2)}`}>
-                {`${idx + 1}. ${method}`}
-              </Text>
-            ))}
-          </Box>
+        <Flex textAlign="left" direction={["column"]} width="100%" py={8}>
+          {parse(selectedRecipe.instructions)}
         </Flex>
       </Box>
     </Fade>

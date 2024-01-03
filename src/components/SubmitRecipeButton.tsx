@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { SetStateAction, useState } from 'react';
 import { Button, useToast } from '@chakra-ui/react';
 import {
   collection, doc, setDoc,
@@ -19,13 +19,15 @@ function SubmitRecipeButton({ newRecipe, userId, setSelectedRecipe }: submitReci
   const toast = useToast();
 
   const {
-    name, method, ingredients, servings,
+    name,
+    servings,
+    tags,
+    total_time,
+    id,
+    instructions,
   } = newRecipe;
-  // true if all required fields are populated
-  const isSubmittable = !!(name.length
-    && method.length
-    && Object.keys(ingredients).length
-    && servings);
+
+  const isSubmittable = !!(name.length && instructions.length);
 
   const handleSubmitRecipe = () => {
     setSubmitLoading(true);
