@@ -28,10 +28,9 @@ function RecipeEditor({ curRecipe, setRecipe }: recipeEditorProps) {
 
   console.log(curRecipe);
   const content = curRecipe.instructions;
-
   const editor = useEditor({
-    extensions,
     content,
+    extensions,
     onUpdate: () => {
       if(editor) setRecipe({...curRecipe, instructions: editor?.getHTML()})
     },

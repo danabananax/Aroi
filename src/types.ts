@@ -13,7 +13,6 @@ export interface recipe {
 }
 
 export interface recipeEditorProps {
-  editorContent: string
   setRecipe: React.Dispatch<SetStateAction<recipe>>
   curRecipe: recipe
 }

@@ -20,17 +20,9 @@ function AddRecipeContainer({ signedInUser, setSelectedRecipe }: addRecipeContai
     total_time: '',
     instructions: "<p>default recipe start</p>",
   };
-
-  const [curRecipe, setCurRecipe] = useState<recipe>(defaultRecipe);
-
-  // Grabbing recipe from location from edit button with useNavigate
+  
   const location = useLocation();
-  useEffect(() => {
-    const recipe = location.state as recipe;
-    if (recipe) {
-      setCurRecipe(recipe);
-    }
-  }, []);
+  const [curRecipe, setCurRecipe] = useState<recipe>(location.state as recipe ?? defaultRecipe);
 
   if (!signedInUser) return <Navigate to="/login" />;
   return (
@@ -50,7 +42,7 @@ function AddRecipeContainer({ signedInUser, setSelectedRecipe }: addRecipeContai
             <AddName newRecipe={curRecipe} setNewRecipe={setCurRecipe} />
             <AddTag newRecipe={curRecipe} setNewRecipe={setCurRecipe}/>
             <TagDisplay newRecipe={curRecipe} setNewRecipe={setCurRecipe} />
-            <RecipeEditor editorContent={curRecipe.instructions} curRecipe={curRecipe} setRecipe={setCurRecipe}/>
+            <RecipeEditor curRecipe={curRecipe} setRecipe={setCurRecipe}/>
           </Flex>
         </Center>
         {setSelectedRecipe !== undefined
