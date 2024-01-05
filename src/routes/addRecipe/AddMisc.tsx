@@ -4,26 +4,20 @@ import {
   AccordionIcon,
   AccordionItem,
   AccordionPanel,
-  Box,
   Flex,
   Heading, Input,
 } from '@chakra-ui/react';
 import { setRecipeProps } from '../../types';
 
-function AddMisc({ newRecipe, setNewRecipe }: setRecipeProps) {
+function AddMisc({ curRecipe, setCurRecipe }: setRecipeProps) {
   const handleServingsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    setNewRecipe({ ...newRecipe, servings: parseInt(value, 10) });
-  };
-
-  const handleActiveTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    setNewRecipe({ ...newRecipe, active_time: value });
+    setCurRecipe({ ...curRecipe, servings: parseInt(value, 10) });
   };
 
   const handleTotalTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    setNewRecipe({ ...newRecipe, total_time: value });
+    setCurRecipe({ ...curRecipe, total_time: value });
   };
 
   return (
@@ -38,21 +32,14 @@ function AddMisc({ newRecipe, setNewRecipe }: setRecipeProps) {
             mb={2}
             onChange={handleServingsChange}
             placeholder="Servings"
-            value={(newRecipe.servings) || ''}
-            size="md"
-          />
-          <Input
-            mb={2}
-            onChange={handleActiveTimeChange}
-            placeholder="Active time"
-            value={newRecipe.active_time}
+            value={(curRecipe.servings) || ''}
             size="md"
           />
           <Input
             mb={2}
             onChange={handleTotalTimeChange}
             placeholder="Total time"
-            value={newRecipe.total_time}
+            value={curRecipe.total_time}
             size="md"
           />
         </Flex>

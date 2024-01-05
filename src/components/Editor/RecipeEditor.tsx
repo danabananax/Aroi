@@ -33,7 +33,6 @@ const extensions = [
   })
 ]
 
-
 function RecipeEditor({ curRecipe, setCurRecipe }: setRecipeProps) {
   console.log(curRecipe);
   const content = curRecipe.instructions;

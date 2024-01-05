@@ -30,7 +30,7 @@ function RecipeLink({ recipe, setSelectedRecipe }: RecipeLinkProps) {
       </Heading>
       <Box>
         <Text>{`Servings: ${recipe.servings}`}</Text>
-        <Text>{`Time: ${recipe.active_time}`}</Text>
+        <Text>{`Time: ${recipe.total_time}`}</Text>
       </Box>
     </Flex>
   );
