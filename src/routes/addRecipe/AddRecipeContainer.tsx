@@ -18,7 +18,7 @@ function AddRecipeContainer({ signedInUser, setSelectedRecipe }: addRecipeContai
     servings: 0,
     tags: [],
     total_time: '',
-    instructions: "<p>default recipe start</p>",
+    instructions: "",
   };
   
   const location = useLocation();

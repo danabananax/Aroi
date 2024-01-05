@@ -64,7 +64,6 @@ function SubmitRecipeButton({ newRecipe, userId, setSelectedRecipe }: submitReci
       isLoading={submitLoading}
       onClick={handleSubmitRecipe}
       mt={4}
-      ml={4}
     >
       Submit
     </Button>

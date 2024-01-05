@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Box, Fade, Flex, Heading, Tag, TagLabel, Text,
+  Box, Fade, Flex, Heading, Tag, TagLabel,
 } from '@chakra-ui/react';
 import { Navigate } from 'react-router-dom';
 import BackButton from '../../components/BackButton';
@@ -8,7 +8,6 @@ import { ViewRecipeProps } from '../../types';
 import EditRecipeButton from '../components/EditRecipeButton';
 import DeleteRecipeButton from '../components/DeleteRecipeButton';
 import parse from 'html-react-parser';
-
 import '../../components/Editor/styles.scss';
 
 function ViewRecipeLayout({ signedInUser, selectedRecipe }: ViewRecipeProps) {

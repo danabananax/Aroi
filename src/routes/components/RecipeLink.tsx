@@ -36,10 +36,10 @@ function RecipeLink({ recipe, setSelectedRecipe }: RecipeLinkProps) {
       <Heading size="lg">
         {recipe.name}
       </Heading>
-      <Box>
+     {/*  <Box>
         <Text>{`Servings: ${recipe.servings}`}</Text>
         <Text>{`Time: ${recipe.active_time}`}</Text>
-      </Box>
+      </Box> */}
     </Flex>
   );
 }

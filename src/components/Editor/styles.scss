@@ -1,4 +1,18 @@
 /* Basic editor styles */
+.tiptap p.is-editor-empty:first-child::before {
+  color: #adb5bd;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+.tiptap p.is-editor-empty.has-focus:first-child::before {
+  color: transparent;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
 .tiptap {
     padding: 1em;
     > * + * {
@@ -17,7 +31,7 @@
     h1 {
         font-size: 2em;
         line-height: 1.3em;
-        
+        font-weight: normal;
     }
 
     h2 {

@@ -1,3 +1,4 @@
+import React from 'react';
 import './styles.scss';
 import { EditorContent, FloatingMenu, useEditor } from '@tiptap/react';
 import { Color } from '@tiptap/extension-color';
@@ -5,8 +6,9 @@ import ListItem from '@tiptap/extension-list-item';
 import TextStyle from '@tiptap/extension-text-style';
 import StarterKit from '@tiptap/starter-kit';
 import { Box, Button } from '@chakra-ui/react';
-import React from 'react';
 import { setRecipeProps } from '../../types';
+import Placeholder from '@tiptap/extension-placeholder';
+import FocusClasses from '@tiptap/extension-focus';
 
 const extensions = [
   Color.configure({ types: [TextStyle.name, ListItem.name] }),
@@ -21,11 +23,18 @@ const extensions = [
       keepAttributes: false,
     },
   }),
+  Placeholder.configure({
+    emptyEditorClass: "is-editor-empty",
+    placeholder: "Start writing your recipe here",
+  }),
+  FocusClasses.configure({
+    className: "has-focus",
+    mode: "all",
+  })
 ]
 
 
 function RecipeEditor({ curRecipe, setCurRecipe }: setRecipeProps) {
-
   console.log(curRecipe);
   const content = curRecipe.instructions;
   const editor = useEditor({
@@ -40,10 +49,6 @@ function RecipeEditor({ curRecipe, setCurRecipe }: setRecipeProps) {
       }
     }
   });
-
-  function printHTML() {
-    console.log(editor?.getHTML());
-  }
 
   if(!editor) return null;
   
@@ -100,12 +105,6 @@ function RecipeEditor({ curRecipe, setCurRecipe }: setRecipeProps) {
         </Button>
       </FloatingMenu>}
       <EditorContent editor={editor} content={content}/>
-      <Button
-        onClick={printHTML}
-        my={4}
-      >
-        Print HTML
-      </Button>
     </Box>
   );
 };
