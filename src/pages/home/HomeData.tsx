@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Box, Fade, Spinner, Text,
+  Box, Fade, Icon, Select, Spinner, Text,
 } from '@chakra-ui/react';
 import {
   collection, getDocs,
 } from 'firebase/firestore';
 import { db } from '../../firebase';
-import RecipeLink from '../components/RecipeLink';
 import { recipe } from '../../types';
+import RecipeLink from '../../components/RecipeLink';
 
 interface HomeDataProps {
     userId: string | undefined
@@ -17,6 +17,7 @@ interface HomeDataProps {
 function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
   const [userRecipes, setUserRecipes] = useState<recipe[]>([]);
   const [loadingRecipes, setLoadingRecipes] = useState(true);
+  const [sortBy, setSortBy] = useState<string | null>();
 
   /**
    * Updates state with list of recipes authored by user
@@ -51,10 +52,28 @@ function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
     );
   }
 
+  if(userRecipes.length < 1) {
+    return (
+      <Fade in>
+        <Box>
+          <Text fontSize="4xl">No recipes to display, click &apos;Add Recipe&apos;.</Text>
+        </Box>
+      </Fade>
+    );
+  }
+
   return (
     <Fade in>
       <Box>
-        {userRecipes.length > 0
+      <Select 
+        placeholder='Sort by' 
+        px={2} 
+        onChange={(e) => setSortBy(e.target.value)}
+      >
+        <option value='servings'>Servings</option>
+        <option value='total_time'>Total time</option>
+      </Select>
+        {sortBy == null
           ? userRecipes.map((recipe: recipe) => (
             <RecipeLink
               recipe={recipe}
@@ -62,7 +81,15 @@ function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
               key={`id${Math.random().toString(16).slice(2)}`}
             />
           ))
-          : <Text fontSize="4xl">No recipes to display, click &apos;Add Recipe&apos;.</Text>}
+          : userRecipes
+            .sort((a, b) => sortBy == 'servings' ? b.servings - a.servings : b.total_time.localeCompare(a.total_time))
+            .map((recipe: recipe) => (
+            <RecipeLink
+              recipe={recipe}
+              setSelectedRecipe={setSelectedRecipe}
+              key={`id${Math.random().toString(16).slice(2)}`}
+            />
+          ))}
       </Box>
     </Fade>
   );

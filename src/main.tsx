@@ -15,11 +15,10 @@ const theme = extendTheme({
       },
       h1: {
         fontSize: '3xl',
-        fontWeight: 'bold',
+        lineHeight: 2.2
       },
       h2: {
         fontSize: '2xl',
-        fontWeight: 'bold',
       },
       h3: {
         fontSize: 'lg'
@@ -32,6 +31,10 @@ const theme = extendTheme({
       },
       h6: {
         fontSize: 'xs',
+        lineHeight: 1.8,
+      },
+      body: {
+        lineHeight: 1.8
       }
     },
     body: {
@@ -57,7 +60,7 @@ const theme = extendTheme({
     },
     h6: {
       fontSize: 'xs',
-    }
+    },
   },
 });
 

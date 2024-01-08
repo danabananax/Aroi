@@ -9,26 +9,29 @@ import { RecipeLinkProps } from '../types';
 function RecipeLink({ recipe, setSelectedRecipe }: RecipeLinkProps) {
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const handleLinkClick = () => {
     setSelectedRecipe(recipe);
     navigate('/recipe');
   };
-  // TODO: Modify existing cards corresponding to the design
+
   return (
     <Flex
-      direction="row"
-      w="400px"
-      justify="space-between"
+      as="button"
+      direction="column"
+      w="300px"
+      justify="flex-end"
+      alignItems="flex-start"
+      textAlign="left"
       m={2}
       p={4}
       borderRadius="9"
       boxShadow="md"
-      onClick={handleClick}
+      onClick={handleLinkClick}
     >
-      <Heading>
+      <Heading size="lg">
         {recipe.name}
       </Heading>
-      <Box>
+      <Box pt={2}>
         <Text>{`Servings: ${recipe.servings}`}</Text>
         <Text>{`Time: ${recipe.total_time}`}</Text>
       </Box>

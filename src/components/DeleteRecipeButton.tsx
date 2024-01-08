@@ -17,8 +17,8 @@ import {
 } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import { DeleteIcon } from '@chakra-ui/icons';
-import { db } from '../../firebase';
-import { deleteRecipeProps } from '../../types';
+import { db } from '../firebase';
+import { deleteRecipeProps } from '../types';
 
 function DeleteRecipeButton({ keyToDelete, recipeName, userId }: deleteRecipeProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();

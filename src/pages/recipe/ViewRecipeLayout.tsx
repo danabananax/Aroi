@@ -1,14 +1,14 @@
 import React from 'react';
 import {
-  Box, Fade, Flex, Heading, Tag, TagLabel,
+  Box, Fade, Flex, Heading, Tag, TagLabel, Text,
 } from '@chakra-ui/react';
 import { Navigate } from 'react-router-dom';
 import BackButton from '../../components/BackButton';
 import { ViewRecipeProps } from '../../types';
-import EditRecipeButton from '../components/EditRecipeButton';
-import DeleteRecipeButton from '../components/DeleteRecipeButton';
+import DeleteRecipeButton from '../../components/DeleteRecipeButton';
 import parse from 'html-react-parser';
 import '../../components/Editor/styles.scss';
+import EditRecipeButton from '../../components/EditRecipeButton';
 
 function ViewRecipeLayout({ signedInUser, selectedRecipe }: ViewRecipeProps) {
   const userId = signedInUser?.uid;
@@ -32,7 +32,7 @@ function ViewRecipeLayout({ signedInUser, selectedRecipe }: ViewRecipeProps) {
           alignItems="flex-start"
         >
           <Heading textAlign="left" size="2xl">{selectedRecipe.name}</Heading>
-          <Box maxW="200px" textAlign="right" mt={2}>
+          <Box maxW="500px" textAlign="right" mt={2}>
             {selectedRecipe.tags.map((tag) => (
               <Tag
                 size="md"
@@ -46,9 +46,11 @@ function ViewRecipeLayout({ signedInUser, selectedRecipe }: ViewRecipeProps) {
                 <TagLabel>{tag.charAt(0).toUpperCase() + tag.slice(1)}</TagLabel>
               </Tag>
             ))}
+            <Text pt={2}>Serves {selectedRecipe.servings}</Text>
+            <Text>{selectedRecipe.total_time}</Text>
           </Box>
         </Flex>
-        <Flex textAlign="left" direction={["column"]} width="100%" py={8}>
+        <Flex textAlign="left" direction={["column"]} width="100%" pt={4}>
           {parse(selectedRecipe.instructions)}
         </Flex>
       </Box>

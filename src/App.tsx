@@ -6,13 +6,13 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { auth } from './firebase';
 import './App.css';
-import Register from './routes/register/Register';
-import Login from './routes/login/Login';
-import HomeLayout from './routes/home/HomeLayout';
-import ViewRecipeLayout from './routes/recipe/ViewRecipeLayout';
+import Register from './pages/register/Register';
+import Login from './pages/login/Login';
+import HomeLayout from './pages/home/HomeLayout';
+import ViewRecipeLayout from './pages/recipe/ViewRecipeLayout';
 import { Iuser, recipe } from './types';
-import AddRecipeContainer from './routes/addRecipe/AddRecipeContainer';
-import HomeData from './routes/home/HomeData';
+import AddRecipeContainer from './pages/addRecipe/AddRecipeContainer';
+import HomeData from './pages/home/HomeData';
 
 function App() {
   const [signedInUser, setSignedInUser] = useState<Iuser>(auth.currentUser);

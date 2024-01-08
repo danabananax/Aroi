@@ -8,9 +8,10 @@ import BackButton from '../../components/BackButton';
 import SubmitRecipeButton from '../../components/SubmitRecipeButton';
 import { recipe, addRecipeContainerProps } from '../../types';
 import AddName from './AddName';
-import RecipeEditor from '../../components/Editor/RecipeEditor';
+import RecipeEditor from './Editor/RecipeEditor';
 import AddTag from './AddTag';
 import TagDisplay from './TagDisplay';
+import AddMisc from './AddMisc';
 
 function AddRecipeContainer({ signedInUser, setSelectedRecipe }: addRecipeContainerProps) {
   const defaultRecipe:recipe = {
@@ -39,7 +40,8 @@ function AddRecipeContainer({ signedInUser, setSelectedRecipe }: addRecipeContai
         </Box>
         <Center>
           <Flex direction={"column"} textAlign={"left"}>
-            <AddName curRecipe={curRecipe} setCurRecipe={setCurRecipe} />
+            <AddName curRecipe={curRecipe} setCurRecipe={setCurRecipe}/>
+            <AddMisc curRecipe={curRecipe} setCurRecipe={setCurRecipe} />
             <AddTag curRecipe={curRecipe} setCurRecipe={setCurRecipe}/>
             <TagDisplay curRecipe={curRecipe} setCurRecipe={setCurRecipe} />
             <RecipeEditor curRecipe={curRecipe} setCurRecipe={setCurRecipe}/>
