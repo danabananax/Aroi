@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Box, Fade, Icon, Select, Spinner, Text,
+  Box, Fade, Flex, Icon, Input, Select, Spinner, Text,
 } from '@chakra-ui/react';
 import {
   collection, getDocs,
@@ -18,6 +18,7 @@ function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
   const [userRecipes, setUserRecipes] = useState<recipe[]>([]);
   const [loadingRecipes, setLoadingRecipes] = useState(true);
   const [sortBy, setSortBy] = useState<string | null>();
+  const [searchString, setSearchString] = useState<string>("");
 
   /**
    * Updates state with list of recipes authored by user
@@ -37,6 +38,11 @@ function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
       console.log(e);
     }
   };
+
+  const searchStringFilter = (recipe: recipe) => {
+    return recipe.name.toLowerCase().includes(searchString.toLowerCase()) 
+    || recipe.tags.join("").includes(searchString.toLowerCase())
+  }
 
   useEffect(() => {
     getRecipes().then(() => {
@@ -65,16 +71,28 @@ function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
   return (
     <Fade in>
       <Box>
-      <Select 
-        placeholder='Sort by' 
-        px={2} 
-        onChange={(e) => setSortBy(e.target.value)}
-      >
-        <option value='servings'>Servings</option>
-        <option value='total_time'>Total time</option>
-      </Select>
+        <Box p={2}>
+          <Input
+            onChange={(e) => {
+              setSearchString(e.target.value);
+            }}
+            placeholder="Search recipes or tags"
+            value={searchString}
+            size="md"
+          />
+        </Box>
+        <Select 
+          placeholder='Sort by' 
+          px={2} 
+          onChange={(e) => setSortBy(e.target.value)}
+        >
+          <option value='servings'>Servings</option>
+          <option value='total_time'>Total time</option>
+        </Select>
         {sortBy == null
-          ? userRecipes.map((recipe: recipe) => (
+          ? userRecipes
+            .filter(searchStringFilter)
+            .map((recipe: recipe) => (
             <RecipeLink
               recipe={recipe}
               setSelectedRecipe={setSelectedRecipe}
@@ -82,7 +100,10 @@ function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
             />
           ))
           : userRecipes
-            .sort((a, b) => sortBy == 'servings' ? b.servings - a.servings : b.total_time.localeCompare(a.total_time))
+            .filter(searchStringFilter)
+            .sort((a, b) => sortBy == 'servings' 
+              ? b.servings - a.servings 
+              : b.total_time.localeCompare(a.total_time))
             .map((recipe: recipe) => (
             <RecipeLink
               recipe={recipe}

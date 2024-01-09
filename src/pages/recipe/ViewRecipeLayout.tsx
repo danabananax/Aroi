@@ -7,7 +7,7 @@ import BackButton from '../../components/BackButton';
 import { ViewRecipeProps } from '../../types';
 import DeleteRecipeButton from '../../components/DeleteRecipeButton';
 import parse from 'html-react-parser';
-import '../../components/Editor/styles.scss';
+import '../../pages/addRecipe/Editor/styles.scss';
 import EditRecipeButton from '../../components/EditRecipeButton';
 
 function ViewRecipeLayout({ signedInUser, selectedRecipe }: ViewRecipeProps) {
