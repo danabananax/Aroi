@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Box, Fade, Flex, Icon, Input, Select, Spinner, Text,
+  Box, Fade, Input, Select, Spinner, Text,
 } from '@chakra-ui/react';
 import {
   collection, getDocs,
@@ -20,10 +20,6 @@ function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
   const [sortBy, setSortBy] = useState<string | null>();
   const [searchString, setSearchString] = useState<string>("");
 
-  /**
-   * Updates state with list of recipes authored by user
-   * @throws console log of error if current user is not defined
-   */
   const getRecipes = async () => {
     setLoadingRecipes(true);
     try {

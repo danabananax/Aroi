@@ -52,7 +52,7 @@ function RecipeEditor({ curRecipe, setCurRecipe }: setRecipeProps) {
   if(!editor) return null;
   
   return (
-    <Box width={[400, 600]}>
+    <Box>
       {editor && <FloatingMenu editor={editor} tippyOptions={{ duration: 100 }}>
         <Button
           onClick={() => editor.chain().focus().toggleBold().run()}
