@@ -22,7 +22,7 @@ function RecipeLink({ recipe, setSelectedRecipe }: RecipeLinkProps) {
       justify="flex-end"
       alignItems="flex-start"
       textAlign="left"
-      m={2}
+      my={2}
       p={4}
       borderRadius="9"
       boxShadow="md"

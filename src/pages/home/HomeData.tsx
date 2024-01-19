@@ -67,7 +67,7 @@ function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
   return (
     <Fade in>
       <Box w="300px">
-        <Box p={2}>
+        <Box py={2}>
           <Input
             onChange={(e) => {
               setSearchString(e.target.value);
@@ -79,7 +79,6 @@ function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
         </Box>
         <Select 
           placeholder='Sort by' 
-          px={2} 
           onChange={(e) => setSortBy(e.target.value)}
         >
           <option value='servings'>Servings</option>

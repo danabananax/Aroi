@@ -102,6 +102,15 @@ function RecipeEditor({ curRecipe, setCurRecipe }: setRecipeProps) {
         >
           bullet list
         </Button>
+        <Button
+          onClick={() => editor.chain().focus().toggleOrderedList().run()}
+          className={editor.isActive('orderedList') ? 'is-active' : ''}
+          size="xs"
+          variant={'outline'}
+          mr={1}
+        >
+          numbered list
+        </Button>
       </FloatingMenu>}
       <EditorContent editor={editor} content={content}/>
     </Box>
