@@ -37,7 +37,7 @@ function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
 
   const searchStringFilter = (recipe: recipe) => {
     return recipe.name.toLowerCase().includes(searchString.toLowerCase()) 
-    || recipe.tags.join("").includes(searchString.toLowerCase())
+    || recipe.tags.join("").toLowerCase().includes(searchString.toLowerCase())
   }
 
   useEffect(() => {
@@ -66,7 +66,7 @@ function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
 
   return (
     <Fade in>
-      <Box>
+      <Box w="300px">
         <Box p={2}>
           <Input
             onChange={(e) => {

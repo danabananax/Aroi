@@ -18,7 +18,7 @@ function RecipeLink({ recipe, setSelectedRecipe }: RecipeLinkProps) {
     <Flex
       as="button"
       direction="column"
-      w="300px"
+      w="100%"
       justify="flex-end"
       alignItems="flex-start"
       textAlign="left"
