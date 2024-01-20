@@ -9,6 +9,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Tooltip,
   useDisclosure,
   useToast,
 } from '@chakra-ui/react';
@@ -46,7 +47,9 @@ function DeleteRecipeButton({ keyToDelete, recipeName, userId }: deleteRecipePro
 
   return (
     <>
-      <IconButton icon={<DeleteIcon boxSize="32px" />} variant="ghost" aria-label="Delete recipe button" onClick={onOpen} />
+      <Tooltip label="Delete recipe">
+        <IconButton icon={<DeleteIcon boxSize="32px" />} variant="ghost" aria-label="Delete recipe button" onClick={onOpen} />
+      </Tooltip> 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
@@ -64,7 +67,6 @@ function DeleteRecipeButton({ keyToDelete, recipeName, userId }: deleteRecipePro
         </ModalContent>
       </Modal>
     </>
-
   );
 }
 

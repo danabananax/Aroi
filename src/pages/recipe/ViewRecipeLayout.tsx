@@ -1,17 +1,20 @@
 import React from 'react';
 import {
-  Box, Fade, Flex, Heading, Tag, TagLabel, Text,
+  Box, Button, Fade, Flex, Heading, Spacer, Tag, TagLabel, Text,
 } from '@chakra-ui/react';
 import { Navigate } from 'react-router-dom';
 import BackButton from '../../components/BackButton';
 import { ViewRecipeProps } from '../../types';
 import DeleteRecipeButton from '../../components/DeleteRecipeButton';
 import parse from 'html-react-parser';
+import { encode, decode } from 'base65536';
 import '../../pages/addRecipe/Editor/styles.scss';
 import EditRecipeButton from '../../components/EditRecipeButton';
+import EncodeAndCopyRecipeBtn from '../../components/EncodeAndCopyRecipeBtn';
 
 function ViewRecipeLayout({ signedInUser, selectedRecipe }: ViewRecipeProps) {
   const userId = signedInUser?.uid;
+
 
   console.log(selectedRecipe?.instructions);
 
@@ -21,11 +24,16 @@ function ViewRecipeLayout({ signedInUser, selectedRecipe }: ViewRecipeProps) {
         <Flex direction="row" justifyContent="space-between" width="100%" mb={8}>
           <BackButton />
           <EditRecipeButton recipe={selectedRecipe} />
-          <DeleteRecipeButton
-            keyToDelete={selectedRecipe.id}
-            recipeName={selectedRecipe.name}
-            userId={userId}
-          />
+          <Box>
+            <EncodeAndCopyRecipeBtn 
+              recipe={selectedRecipe} 
+            />
+            <DeleteRecipeButton
+              keyToDelete={selectedRecipe.id}
+              recipeName={selectedRecipe.name}
+              userId={userId}
+            />
+          </Box>
         </Flex>
         <Flex
           justifyContent="space-between"

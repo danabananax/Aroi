@@ -12,6 +12,7 @@ import RecipeEditor from './Editor/RecipeEditor';
 import AddTag from './AddTag';
 import TagDisplay from './TagDisplay';
 import AddMisc from './AddMisc';
+import AddRecipeFromLinkBtn from '../../components/AddRecipeFromLinkBtn';
 
 function AddRecipeContainer({ signedInUser, setSelectedRecipe }: addRecipeContainerProps) {
   const defaultRecipe:recipe = {
@@ -29,15 +30,15 @@ function AddRecipeContainer({ signedInUser, setSelectedRecipe }: addRecipeContai
   return (
     <Fade in>
       <Flex direction={["column"]}>
-        <Box
+        <Flex
           textAlign={"left"}
-          mb={[8, 0]}
-          flex={1}
+          mb={[14, 6]}
+          direction={"row"}
+          justifyContent={'space-between'}
         >
-          <Box mb={6}>
-            <BackButton />
-          </Box>
-        </Box>
+          <BackButton />
+          <AddRecipeFromLinkBtn userId={signedInUser.uid} />
+        </Flex>
         <Center>
           <Flex direction={"column"} textAlign={"left"} w={["300px", "100%"]}>
             <AddName curRecipe={curRecipe} setCurRecipe={setCurRecipe}/>

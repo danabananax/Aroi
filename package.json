@@ -21,6 +21,7 @@
     "@tiptap/pm": "^2.1.13",
     "@tiptap/react": "^2.1.13",
     "@tiptap/starter-kit": "^2.1.13",
+    "base65536": "^4.0.3",
     "dotenv": "^16.0.1",
     "firebase": "^9.9.1",
     "focus-visible": "^5.2.0",
