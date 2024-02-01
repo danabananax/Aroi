@@ -1,44 +1,55 @@
-import React from 'react';
+import React, { SetStateAction } from 'react';
 import {
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
   Flex,
-  Heading, Input,
+  Input,
 } from '@chakra-ui/react';
-import { setRecipeProps } from '../../types';
+import { recipe } from '../../types';
 
-function AddMisc({ curRecipe, setCurRecipe }: setRecipeProps) {
+interface Props {
+  curRecipe: recipe
+  setCurRecipe: React.Dispatch<SetStateAction<recipe>>
+  minutes: number
+  hours: number
+  setMinutes: React.Dispatch<SetStateAction<number>>
+  setHours: React.Dispatch<SetStateAction<number>>
+}
+
+function AddMisc({
+  curRecipe, setCurRecipe, minutes, hours, setMinutes, setHours,
+}: Props) {
   const handleServingsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     setCurRecipe({ ...curRecipe, servings: parseInt(value, 10) });
   };
 
-  const handleTotalTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    setCurRecipe({ ...curRecipe, total_time: value });
-  };
-
   return (
-    <>
-      <Flex direction={"row"} justify={"space-between"}>
-        <Input
-          onChange={handleServingsChange}
-          placeholder="Servings"
-          value={(curRecipe.servings) || ''}
-          size="md"
-          mr={2}
-        />
-        <Input
-          onChange={handleTotalTimeChange}
-          placeholder="Time"
-          value={curRecipe.total_time}
-          size="md"
-          ml={2}
-        />
-      </Flex>
-    </>
+    <Flex direction="row" justify="space-between">
+      <Input
+        flex={2}
+        onChange={handleServingsChange}
+        placeholder="Servings"
+        value={(curRecipe.servings) || ''}
+        size="md"
+      />
+      <Input
+        flex={1}
+        type="number"
+        onChange={(e) => { setHours(parseInt(e.target.value, 10)); }}
+        placeholder="Hours"
+        value={hours || ''}
+        size="md"
+        ml={2}
+      />
+      <Input
+        flex={1}
+        type="number"
+        onChange={(e) => { setMinutes(parseInt(e.target.value, 10)); }}
+        placeholder="Mins"
+        value={minutes || ''}
+        size="md"
+        ml={2}
+      />
+    </Flex>
   );
 }
 

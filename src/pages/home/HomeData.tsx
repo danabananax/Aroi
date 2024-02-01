@@ -18,7 +18,7 @@ function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
   const [userRecipes, setUserRecipes] = useState<recipe[]>([]);
   const [loadingRecipes, setLoadingRecipes] = useState(true);
   const [sortBy, setSortBy] = useState<string | null>();
-  const [searchString, setSearchString] = useState<string>("");
+  const [searchString, setSearchString] = useState<string>('');
 
   const getRecipes = async () => {
     setLoadingRecipes(true);
@@ -27,7 +27,7 @@ function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
       const userRecipesCollectionRef = collection(db, 'users', userId, 'recipes');
       const userRecipesSnapshot = await getDocs(userRecipesCollectionRef);
       const updatedRecipesList = userRecipesSnapshot.docs.map((recipeSnapshot) => (
-        {...recipeSnapshot.data(), id: recipeSnapshot.id} as recipe
+        { ...recipeSnapshot.data(), id: recipeSnapshot.id } as recipe
       ));
       setUserRecipes(updatedRecipesList);
     } catch (e) {
@@ -35,10 +35,10 @@ function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
     }
   };
 
-  const searchStringFilter = (recipe: recipe) => {
-    return recipe.name.toLowerCase().includes(searchString.toLowerCase()) 
-    || recipe.tags.join("").toLowerCase().includes(searchString.toLowerCase())
-  }
+  const searchNameAndTagFilter = (recipe: recipe) => (
+    recipe.name.toLowerCase().includes(searchString.toLowerCase())
+    || recipe.tags.join('').toLowerCase().includes(searchString.toLowerCase())
+  );
 
   useEffect(() => {
     getRecipes().then(() => {
@@ -54,7 +54,7 @@ function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
     );
   }
 
-  if(userRecipes.length < 1) {
+  if (userRecipes.length < 1) {
     return (
       <Fade in>
         <Box>
@@ -77,35 +77,35 @@ function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
             size="md"
           />
         </Box>
-        <Select 
-          placeholder='Sort by' 
+        <Select
+          placeholder="Sort by"
           onChange={(e) => setSortBy(e.target.value)}
         >
-          <option value='servings'>Servings</option>
-          <option value='total_time'>Total time</option>
+          <option value="servings">Servings</option>
+          <option value="total_time">Total time</option>
         </Select>
         {sortBy == null
           ? userRecipes
-            .filter(searchStringFilter)
+            .filter(searchNameAndTagFilter)
             .map((recipe: recipe) => (
-            <RecipeLink
-              recipe={recipe}
-              setSelectedRecipe={setSelectedRecipe}
-              key={`id${Math.random().toString(16).slice(2)}`}
-            />
-          ))
+              <RecipeLink
+                recipe={recipe}
+                setSelectedRecipe={setSelectedRecipe}
+                key={`id${Math.random().toString(16).slice(2)}`}
+              />
+            ))
           : userRecipes
-            .filter(searchStringFilter)
-            .sort((a, b) => sortBy == 'servings' 
-              ? b.servings - a.servings 
-              : b.total_time.localeCompare(a.total_time))
+            .filter(searchNameAndTagFilter)
+            .sort((a, b) => (sortBy === 'servings'
+              ? b.servings - a.servings
+              : b.total_time - a.total_time))
             .map((recipe: recipe) => (
-            <RecipeLink
-              recipe={recipe}
-              setSelectedRecipe={setSelectedRecipe}
-              key={`id${Math.random().toString(16).slice(2)}`}
-            />
-          ))}
+              <RecipeLink
+                recipe={recipe}
+                setSelectedRecipe={setSelectedRecipe}
+                key={`id${Math.random().toString(16).slice(2)}`}
+              />
+            ))}
       </Box>
     </Fade>
   );

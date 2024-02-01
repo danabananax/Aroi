@@ -1,4 +1,4 @@
-import React, { SetStateAction, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, useToast } from '@chakra-ui/react';
 import {
   collection, doc, setDoc,
@@ -11,19 +11,18 @@ interface submitRecipeButtonProps {
     newRecipe: recipe
     userId: string
     setSelectedRecipe: React.Dispatch<recipe>
+    totalTime: number
 }
 
-function SubmitRecipeButton({ newRecipe, userId, setSelectedRecipe }: submitRecipeButtonProps) {
+function SubmitRecipeButton({
+  newRecipe, userId, setSelectedRecipe, totalTime,
+}: submitRecipeButtonProps) {
   const [submitLoading, setSubmitLoading] = useState(false);
   const navigate = useNavigate();
   const toast = useToast();
 
   const {
     name,
-    servings,
-    tags,
-    total_time,
-    id,
     instructions,
   } = newRecipe;
 
@@ -31,7 +30,8 @@ function SubmitRecipeButton({ newRecipe, userId, setSelectedRecipe }: submitReci
 
   const handleSubmitRecipe = () => {
     setSubmitLoading(true);
-    const newRecipeCopy = newRecipe;
+    let newRecipeCopy = newRecipe;
+    newRecipeCopy = { ...newRecipeCopy, total_time: totalTime };
 
     // edit vs add new doc
     const newRecipeDocRef = newRecipeCopy.id
@@ -41,22 +41,22 @@ function SubmitRecipeButton({ newRecipe, userId, setSelectedRecipe }: submitReci
     setDoc(newRecipeDocRef, newRecipeCopy)
       .then(() => {
         toast({
-          title: "Recipe successfully uploaded",
+          title: 'Recipe successfully uploaded',
           status: 'success',
           duration: 2000,
-        })
-      setSubmitLoading(false);
-      setSelectedRecipe(newRecipe);
-      navigate(-1);
+        });
+        setSubmitLoading(false);
+        setSelectedRecipe(newRecipe);
+        navigate(-1);
       })
       .catch((e) => {
         toast({
           title: e.name,
           status: 'error',
           duration: 4000,
-        })
-      })
-  }
+        });
+      });
+  };
 
   return (
     <Button

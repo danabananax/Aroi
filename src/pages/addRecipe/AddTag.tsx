@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import {
-  Box, Button, Flex, Input, useToast,
+  Box, Input, useToast,
 } from '@chakra-ui/react';
 import { setRecipeProps } from '../../types';
 
@@ -19,10 +19,10 @@ function AddTag({ curRecipe, setCurRecipe }: setRecipeProps) {
     }
     toast({
       title: `${tag} added to tags`,
-      status: "info",
+      status: 'info',
       duration: 1500,
-      position: "top",
-    })
+      position: 'top',
+    });
     setTag('');
     tagInput.current?.focus();
   };

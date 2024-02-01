@@ -9,11 +9,11 @@ function EditRecipeButton({ recipe }: {recipe: recipe}) {
   const handleEditRecipe = () => { navigate('/add', { state: recipe }); };
   return (
     <Tooltip label="Edit recipe">
-      <IconButton 
-        icon={<EditIcon boxSize="32px" />} 
-        variant="ghost" 
-        aria-label="Edit recipe button" 
-        onClick={handleEditRecipe} 
+      <IconButton
+        icon={<EditIcon boxSize="32px" />}
+        variant="ghost"
+        aria-label="Edit recipe button"
+        onClick={handleEditRecipe}
       />
     </Tooltip>
   );

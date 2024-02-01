@@ -13,7 +13,7 @@ function DeletableEntry({ identifier, textContent, deleteFunction }: DeletableEn
       key={`id${Math.random().toString(16).slice(2)}`}
       mb={2}
       px={[4, 0]}
-      textAlign={["left"]}
+      textAlign={['left']}
     >
       <Text lineHeight="short" wordBreak="break-all">
         {textContent}

@@ -34,10 +34,10 @@ function DeleteRecipeButton({ keyToDelete, recipeName, userId }: deleteRecipePro
       deleteDoc(recipesToDeleteRef)
         .then(() => {
           toast({
-            title: "Deleted recipe",
-            status: "success",
+            title: 'Deleted recipe',
+            status: 'success',
             duration: 2000,
-          })
+          });
         })
         .then(() => { navigate('/'); })
         .catch((e) => console.log(e))
@@ -49,7 +49,7 @@ function DeleteRecipeButton({ keyToDelete, recipeName, userId }: deleteRecipePro
     <>
       <Tooltip label="Delete recipe">
         <IconButton icon={<DeleteIcon boxSize="32px" />} variant="ghost" aria-label="Delete recipe button" onClick={onOpen} />
-      </Tooltip> 
+      </Tooltip>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>

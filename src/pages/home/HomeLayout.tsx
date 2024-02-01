@@ -41,7 +41,6 @@ function Home({ signedInUser, homedata }: HomeProps) {
         </Button>
       </Flex>
 
-      
       { homedata }
     </Box>
   );

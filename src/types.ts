@@ -7,7 +7,7 @@ export interface recipe {
     name: string
     servings: number
     tags: Array<string>
-    total_time: string
+    total_time: number
     id?: string
     instructions: string
 }

@@ -16,6 +16,7 @@
     "@emotion/styled": "^11.10.0",
     "@tiptap/extension-color": "^2.1.13",
     "@tiptap/extension-focus": "^2.1.13",
+    "@tiptap/extension-list-item": "^2.2.1",
     "@tiptap/extension-placeholder": "^2.1.13",
     "@tiptap/extension-text-style": "^2.1.13",
     "@tiptap/pm": "^2.1.13",
