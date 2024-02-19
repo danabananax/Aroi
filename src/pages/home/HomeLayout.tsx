@@ -24,23 +24,21 @@ function Home({ signedInUser, homedata }: HomeProps) {
 
   if (!signedInUser) return <Navigate to="/login" />;
   return (
-    <Box textAlign="center">
-      <Flex mb={6} justify="center">
+    <Box textAlign="center" p={6} w={['390px', '600px', '1200px']}>
+      <Flex mb={6} justify={['center', 'center', 'flex-start']}>
         <Button
           isLoading={logoutLoading}
           onClick={handleLogout}
-          m={2}
+          mr={4}
         >
           Logout
         </Button>
         <Button
           onClick={handleAddRecipe}
-          m={2}
         >
           Add Recipe
         </Button>
       </Flex>
-
       { homedata }
     </Box>
   );

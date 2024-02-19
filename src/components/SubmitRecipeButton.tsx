@@ -46,7 +46,7 @@ function SubmitRecipeButton({
           duration: 2000,
         });
         setSubmitLoading(false);
-        setSelectedRecipe(newRecipe);
+        setSelectedRecipe(newRecipeCopy);
         navigate(-1);
       })
       .catch((e) => {
@@ -63,6 +63,7 @@ function SubmitRecipeButton({
       isDisabled={!isSubmittable}
       isLoading={submitLoading}
       onClick={handleSubmitRecipe}
+      width="8em"
       mt={4}
     >
       Submit

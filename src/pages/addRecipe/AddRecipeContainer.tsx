@@ -1,4 +1,5 @@
 import {
+  Box,
   Center, Fade, Flex,
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
@@ -31,42 +32,46 @@ function AddRecipeContainer({ signedInUser, setSelectedRecipe }: addRecipeContai
   if (!signedInUser) return <Navigate to="/login" />;
   return (
     <Fade in>
-      <Flex direction={['column']}>
-        <Flex
-          textAlign="left"
-          mb={[14, 6]}
-          direction="row"
-          justifyContent="space-between"
-        >
-          <BackButton />
-          <AddRecipeFromLinkBtn userId={signedInUser.uid} />
-        </Flex>
-        <Center>
-          <Flex direction="column" textAlign="left" w={['300px', '100%']}>
-            <AddName curRecipe={curRecipe} setCurRecipe={setCurRecipe} />
-            <AddMisc
-              curRecipe={curRecipe}
-              setCurRecipe={setCurRecipe}
-              hours={hours}
-              minutes={minutes}
-              setMinutes={setMinutes}
-              setHours={setHours}
-            />
-            <AddTag curRecipe={curRecipe} setCurRecipe={setCurRecipe} />
-            <TagDisplay curRecipe={curRecipe} setCurRecipe={setCurRecipe} />
-            <RecipeEditor curRecipe={curRecipe} setCurRecipe={setCurRecipe} />
+      <Box minW={['390px', '900px']} maxW="1000px" px={[6, 2]}>
+        <Flex direction={['column']} width="100%">
+          <Flex
+            textAlign="left"
+            mb={[14, 6]}
+            direction="row"
+            justifyContent="space-between"
+          >
+            <BackButton />
+            <AddRecipeFromLinkBtn userId={signedInUser.uid} />
           </Flex>
-        </Center>
-        {setSelectedRecipe !== undefined
+          <Center>
+            <Flex direction="column" textAlign="left">
+              <AddName curRecipe={curRecipe} setCurRecipe={setCurRecipe} />
+              <AddMisc
+                curRecipe={curRecipe}
+                setCurRecipe={setCurRecipe}
+                hours={hours}
+                minutes={minutes}
+                setMinutes={setMinutes}
+                setHours={setHours}
+              />
+              <AddTag curRecipe={curRecipe} setCurRecipe={setCurRecipe} />
+              <TagDisplay curRecipe={curRecipe} setCurRecipe={setCurRecipe} />
+              <RecipeEditor curRecipe={curRecipe} setCurRecipe={setCurRecipe} />
+            </Flex>
+          </Center>
+          {setSelectedRecipe !== undefined
         && (
-        <SubmitRecipeButton
-          userId={signedInUser.uid}
-          newRecipe={curRecipe}
-          setSelectedRecipe={setSelectedRecipe}
-          totalTime={totalTime}
-        />
+          <Box>
+            <SubmitRecipeButton
+              userId={signedInUser.uid}
+              newRecipe={curRecipe}
+              setSelectedRecipe={setSelectedRecipe}
+              totalTime={totalTime}
+            />
+          </Box>
         )}
-      </Flex>
+        </Flex>
+      </Box>
     </Fade>
   );
 }

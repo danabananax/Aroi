@@ -34,7 +34,9 @@ function AddMisc({
       <Input
         flex={1}
         type="number"
-        onChange={(e) => { setHours(parseInt(e.target.value, 10)); }}
+        onChange={(e) => {
+          setHours(e.target.value.length > 0 ? parseInt(e.target.value, 10) : 0);
+        }}
         placeholder="Hours"
         value={hours || ''}
         size="md"
@@ -43,7 +45,9 @@ function AddMisc({
       <Input
         flex={1}
         type="number"
-        onChange={(e) => { setMinutes(parseInt(e.target.value, 10)); }}
+        onChange={(e) => {
+          setMinutes(e.target.value.length > 0 ? parseInt(e.target.value, 10) : 0);
+        }}
         placeholder="Mins"
         value={minutes || ''}
         size="md"

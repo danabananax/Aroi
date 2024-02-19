@@ -15,27 +15,27 @@ const theme = extendTheme({
       },
       h1: {
         fontSize: '3xl',
-        lineHeight: 2.2
+        lineHeight: 2.2,
       },
       h2: {
         fontSize: '2xl',
       },
       h3: {
-        fontSize: 'lg'
+        fontSize: 'lg',
       },
       h4: {
-        fontSize: 'md'
+        fontSize: 'md',
       },
       h5: {
-        fontSize: 'sm'
+        fontSize: 'sm',
       },
       h6: {
         fontSize: 'xs',
         lineHeight: 1.8,
       },
       body: {
-        lineHeight: 1.8
-      }
+        lineHeight: 1.8,
+      },
     },
     body: {
       bg: 'gray.50',
@@ -50,13 +50,13 @@ const theme = extendTheme({
       fontWeight: 'bold',
     },
     h3: {
-      fontSize: 'lg'
+      fontSize: 'lg',
     },
     h4: {
-      fontSize: 'md'
+      fontSize: 'md',
     },
     h5: {
-      fontSize: 'sm'
+      fontSize: 'sm',
     },
     h6: {
       fontSize: 'xs',

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Box, Fade, Input, Select, Spinner, Text,
+  Box, Fade, Flex, Heading, Input, Select, Spinner, Text,
 } from '@chakra-ui/react';
 import {
   collection, getDocs,
@@ -32,6 +32,8 @@ function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
       setUserRecipes(updatedRecipesList);
     } catch (e) {
       console.log(e);
+    } finally {
+      setLoadingRecipes(false);
     }
   };
 
@@ -66,8 +68,8 @@ function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
 
   return (
     <Fade in>
-      <Box w="300px">
-        <Box py={2}>
+      <Box width="100%">
+        <Box py={2} w={['100%', '100%', '400px']}>
           <Input
             onChange={(e) => {
               setSearchString(e.target.value);
@@ -75,37 +77,47 @@ function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
             placeholder="Search recipes or tags"
             value={searchString}
             size="md"
+            my={2}
           />
+          <Select
+            placeholder="Sort by"
+            onChange={(e) => setSortBy(e.target.value)}
+          >
+            <option value="servings">Servings</option>
+            <option value="total_time">Total time</option>
+          </Select>
         </Box>
-        <Select
-          placeholder="Sort by"
-          onChange={(e) => setSortBy(e.target.value)}
+        <Heading pt={8} textAlign="left">All Recipes</Heading>
+        <Flex
+          pt={4}
+          overflowX="scroll"
+          direction="row"
+          flexWrap="nowrap"
+          shrink={0}
         >
-          <option value="servings">Servings</option>
-          <option value="total_time">Total time</option>
-        </Select>
-        {sortBy == null
-          ? userRecipes
-            .filter(searchNameAndTagFilter)
-            .map((recipe: recipe) => (
-              <RecipeLink
-                recipe={recipe}
-                setSelectedRecipe={setSelectedRecipe}
-                key={`id${Math.random().toString(16).slice(2)}`}
-              />
-            ))
-          : userRecipes
-            .filter(searchNameAndTagFilter)
-            .sort((a, b) => (sortBy === 'servings'
-              ? b.servings - a.servings
-              : b.total_time - a.total_time))
-            .map((recipe: recipe) => (
-              <RecipeLink
-                recipe={recipe}
-                setSelectedRecipe={setSelectedRecipe}
-                key={`id${Math.random().toString(16).slice(2)}`}
-              />
-            ))}
+          {sortBy == null
+            ? userRecipes
+              .filter(searchNameAndTagFilter)
+              .map((recipe: recipe) => (
+                <RecipeLink
+                  recipe={recipe}
+                  setSelectedRecipe={setSelectedRecipe}
+                  key={`id${Math.random().toString(16).slice(2)}`}
+                />
+              ))
+            : userRecipes
+              .filter(searchNameAndTagFilter)
+              .sort((a, b) => (sortBy === 'servings'
+                ? b.servings - a.servings
+                : b.total_time - a.total_time))
+              .map((recipe: recipe) => (
+                <RecipeLink
+                  recipe={recipe}
+                  setSelectedRecipe={setSelectedRecipe}
+                  key={`id${Math.random().toString(16).slice(2)}`}
+                />
+              ))}
+        </Flex>
       </Box>
     </Fade>
   );
