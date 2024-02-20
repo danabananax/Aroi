@@ -38,6 +38,8 @@ function SubmitRecipeButton({
       ? doc(db, 'users', userId, 'recipes', newRecipeCopy?.id)
       : doc(collection(db, 'users', userId, 'recipes'));
 
+    newRecipeCopy.id = newRecipeDocRef.id;
+
     setDoc(newRecipeDocRef, newRecipeCopy)
       .then(() => {
         toast({

@@ -11,6 +11,17 @@ function AddTag({ curRecipe, setCurRecipe }: setRecipeProps) {
 
   const handleAddTag = (event: React.SyntheticEvent) => {
     event.preventDefault();
+
+    if (curRecipe.tags.length >= 5) {
+      toast({
+        title: 'Tag limit for recipe exceeded',
+        status: 'warning',
+        duration: 1500,
+        position: 'bottom',
+      });
+      return;
+    }
+
     if (!curRecipe.tags.includes(tag)) {
       setCurRecipe({
         ...curRecipe,

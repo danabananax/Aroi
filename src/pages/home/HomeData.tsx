@@ -16,6 +16,7 @@ interface HomeDataProps {
 
 function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
   const [userRecipes, setUserRecipes] = useState<recipe[]>([]);
+  const [userFavourites, setUserFavourites] = useState<recipe[]>([]);
   const [loadingRecipes, setLoadingRecipes] = useState(true);
   const [sortBy, setSortBy] = useState<string | null>();
   const [searchString, setSearchString] = useState<string>('');
@@ -29,6 +30,7 @@ function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
       const updatedRecipesList = userRecipesSnapshot.docs.map((recipeSnapshot) => (
         { ...recipeSnapshot.data(), id: recipeSnapshot.id } as recipe
       ));
+      setUserFavourites(updatedRecipesList.filter((recipe) => recipe.favourite));
       setUserRecipes(updatedRecipesList);
     } catch (e) {
       console.log(e);
@@ -66,6 +68,7 @@ function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
     );
   }
 
+  console.log(userFavourites);
   return (
     <Fade in>
       <Box width="100%">
@@ -87,6 +90,30 @@ function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
             <option value="total_time">Total time</option>
           </Select>
         </Box>
+        {
+          userFavourites.length > 0
+          && searchString === ''
+          && (
+          <>
+            <Heading pt={8} textAlign="left">Favourites</Heading>
+            <Flex
+              pt={4}
+              overflowX="scroll"
+              direction="row"
+              flexWrap="nowrap"
+              shrink={0}
+            >
+              {userFavourites.map((recipe) => (
+                <RecipeLink
+                  recipe={recipe}
+                  setSelectedRecipe={setSelectedRecipe}
+                  key={recipe.id}
+                />
+              ))}
+            </Flex>
+          </>
+          )
+        }
         <Heading pt={8} textAlign="left">All Recipes</Heading>
         <Flex
           pt={4}
@@ -98,11 +125,11 @@ function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
           {sortBy == null
             ? userRecipes
               .filter(searchNameAndTagFilter)
-              .map((recipe: recipe) => (
+              .map((recipe) => (
                 <RecipeLink
                   recipe={recipe}
                   setSelectedRecipe={setSelectedRecipe}
-                  key={`id${Math.random().toString(16).slice(2)}`}
+                  key={recipe.id}
                 />
               ))
             : userRecipes
@@ -110,11 +137,11 @@ function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
               .sort((a, b) => (sortBy === 'servings'
                 ? b.servings - a.servings
                 : b.total_time - a.total_time))
-              .map((recipe: recipe) => (
+              .map((recipe) => (
                 <RecipeLink
                   recipe={recipe}
                   setSelectedRecipe={setSelectedRecipe}
-                  key={`id${Math.random().toString(16).slice(2)}`}
+                  key={recipe.id}
                 />
               ))}
         </Flex>

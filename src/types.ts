@@ -8,8 +8,9 @@ export interface recipe {
     servings: number
     tags: Array<string>
     total_time: number
-    id?: string
+    id: string
     instructions: string
+    favourite: boolean
 }
 
 export interface recipeEntry {
