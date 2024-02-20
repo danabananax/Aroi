@@ -16,11 +16,13 @@ import AddRecipeFromLinkBtn from '../../components/AddRecipeFromLinkBtn';
 
 function AddRecipeContainer({ signedInUser, setSelectedRecipe }: addRecipeContainerProps) {
   const defaultRecipe:recipe = {
+    id: '',
     name: '',
     servings: 0,
     tags: [],
     total_time: 0,
     instructions: '',
+    favourite: false,
   };
 
   const location = useLocation();

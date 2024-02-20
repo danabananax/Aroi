@@ -10,7 +10,7 @@ export interface recipe {
     total_time: number
     id: string
     instructions: string
-    favourite: boolean | undefined
+    favourite: boolean;
 }
 
 export interface recipeEntry {
