@@ -68,7 +68,6 @@ function HomeData({ userId, setSelectedRecipe }: HomeDataProps) {
     );
   }
 
-  console.log(userFavourites);
   return (
     <Fade in>
       <Box width="100%">

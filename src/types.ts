@@ -1,5 +1,6 @@
 import { User } from 'firebase/auth';
 import React, { SetStateAction } from 'react';
+import { ingredientNutrition } from './components/GetNutritionBtn';
 
 export type Iuser = User | null;
 
@@ -11,6 +12,7 @@ export interface recipe {
     id: string
     instructions: string
     favourite: boolean;
+    nutrition?: ingredientNutrition;
 }
 
 export interface recipeEntry {

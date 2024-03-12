@@ -1,6 +1,6 @@
 import {
   Box,
-  Center, Fade, Flex,
+  Center, Fade, Flex, Spacer,
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
@@ -13,6 +13,8 @@ import AddTag from './AddTag';
 import TagDisplay from './TagDisplay';
 import AddMisc from './AddMisc';
 import AddRecipeFromLinkBtn from '../../components/AddRecipeFromLinkBtn';
+import GetNutritionBtn from '../../components/GetNutritionBtn';
+import NutritionAccordion from '../../components/NutritionAccordion';
 
 function AddRecipeContainer({ signedInUser, setSelectedRecipe }: addRecipeContainerProps) {
   const defaultRecipe:recipe = {
@@ -43,7 +45,11 @@ function AddRecipeContainer({ signedInUser, setSelectedRecipe }: addRecipeContai
             justifyContent="space-between"
           >
             <BackButton />
-            <AddRecipeFromLinkBtn userId={signedInUser.uid} />
+            <Flex flexDir="row">
+              <AddRecipeFromLinkBtn userId={signedInUser.uid} />
+              <Spacer px={1} />
+              <GetNutritionBtn setCurRecipe={setCurRecipe} curRecipe={curRecipe} />
+            </Flex>
           </Flex>
           <Center>
             <Flex direction="column" textAlign="left">
@@ -59,10 +65,9 @@ function AddRecipeContainer({ signedInUser, setSelectedRecipe }: addRecipeContai
               <AddTag curRecipe={curRecipe} setCurRecipe={setCurRecipe} />
               <TagDisplay curRecipe={curRecipe} setCurRecipe={setCurRecipe} />
               <RecipeEditor curRecipe={curRecipe} setCurRecipe={setCurRecipe} />
+              {curRecipe.nutrition && <NutritionAccordion nutrition={curRecipe.nutrition} /> }
             </Flex>
           </Center>
-          {setSelectedRecipe !== undefined
-        && (
           <Box>
             <SubmitRecipeButton
               userId={signedInUser.uid}
@@ -71,7 +76,6 @@ function AddRecipeContainer({ signedInUser, setSelectedRecipe }: addRecipeContai
               totalTime={totalTime}
             />
           </Box>
-        )}
         </Flex>
       </Box>
     </Fade>

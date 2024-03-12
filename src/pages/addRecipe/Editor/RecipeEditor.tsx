@@ -39,7 +39,12 @@ function RecipeEditor({ curRecipe, setCurRecipe }: setRecipeProps) {
     content,
     extensions,
     onUpdate: () => {
-      if (editor) setCurRecipe({ ...curRecipe, instructions: editor?.getHTML() });
+      if (editor) {
+        setCurRecipe({
+          ...curRecipe,
+          instructions: `${editor?.getHTML()}`,
+        });
+      }
     },
     editorProps: {
       attributes: {
@@ -118,7 +123,7 @@ function RecipeEditor({ curRecipe, setCurRecipe }: setRecipeProps) {
         </FloatingMenu>
       )}
       <Box maxW={['390px', '650px']}>
-        <EditorContent editor={editor} content={content} />
+        <EditorContent editor={editor} content={content + curRecipe.nutrition} />
       </Box>
     </Box>
   );

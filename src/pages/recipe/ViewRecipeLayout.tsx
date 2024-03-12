@@ -17,6 +17,7 @@ import '../addRecipe/Editor/styles.scss';
 import EditRecipeButton from '../../components/EditRecipeButton';
 import EncodeAndCopyRecipeBtn from '../../components/EncodeAndCopyRecipeBtn';
 import AddFavsBar from '../addRecipe/Editor/AddFavsBar';
+import DisplayNutrition from '../../components/DisplayNutrition';
 
 function ViewRecipeLayout({ signedInUser, selectedRecipe }: ViewRecipeProps) {
   const userId = signedInUser?.uid;
@@ -75,8 +76,17 @@ function ViewRecipeLayout({ signedInUser, selectedRecipe }: ViewRecipeProps) {
             </Text>
           </Box>
         </Flex>
-        <Flex textAlign="left" direction={['column']} width="100%" pt={4}>
-          {parse(selectedRecipe.instructions)}
+        <Flex direction={['column', 'row']}>
+          <Flex textAlign="left" flex={3} direction={['column']} pt={4}>
+            {parse(selectedRecipe.instructions)}
+          </Flex>
+          { selectedRecipe.nutrition
+            && (
+            <Flex textAlign="left" flex={1} direction={['column']} pt={4}>
+              <Text fontSize={24}>Nutrition</Text>
+              <DisplayNutrition nutrition={selectedRecipe.nutrition} />
+            </Flex>
+            )}
         </Flex>
       </Box>
     </Fade>
